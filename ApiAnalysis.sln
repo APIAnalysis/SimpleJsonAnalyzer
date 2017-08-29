@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAnalysis.SimpleJsonAnalyzer", "ApiAnalysis.SimpleJsonAnalyzer\ApiAnalysis.SimpleJsonAnalyzer.csproj", "{70518710-0E6D-4E47-80FA-114BF838E76B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A30F73B8-D54C-459B-9D62-8DC6BE1446E5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		GlobalSuppressions.cs = GlobalSuppressions.cs
+		StyleCop.json = StyleCop.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{4465AC5D-7F12-4F71-91CD-1EF0C3E8F7A3}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAnalysis.SimpleJsonAnalyzer.UnitTests", "ApiAnalysis.SimpleJsonAnalyzer.UnitTests\ApiAnalysis.SimpleJsonAnalyzer.UnitTests.csproj", "{F1423CF9-A255-4081-97B4-A208C98BACE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70518710-0E6D-4E47-80FA-114BF838E76B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70518710-0E6D-4E47-80FA-114BF838E76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70518710-0E6D-4E47-80FA-114BF838E76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70518710-0E6D-4E47-80FA-114BF838E76B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0030096-63BF-467D-B88F-06BE9C8C225D}
+	EndGlobalSection
+EndGlobal

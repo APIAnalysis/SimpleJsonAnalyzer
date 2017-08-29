@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>ApiAnalysis</RootNamespace>
+    <Title>SimpleJsonAnalyzer</Title>
+    <PackageId>ApiAnalysis.SimpleJsonAnalyzer</PackageId>
+    <PackageVersion>0.2.0</PackageVersion>
+    <Authors>Matt Lacey</Authors>
+    <PackageProjectUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Analyzer for comparing JSON and POCO types.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Pre-Release version</PackageReleaseNotes>
+    <Copyright>Copyright 2017 © Matt Lacey. All rights reserved.</Copyright>
+    <PackageTags>API JSON .Net POCO</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\StyleCop.json" Link="StyleCop.json" />
+    <Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
