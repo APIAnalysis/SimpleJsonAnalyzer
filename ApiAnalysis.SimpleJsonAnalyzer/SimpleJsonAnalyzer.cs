@@ -798,7 +798,7 @@ namespace ApiAnalysis
                         return true;
                     }
 
-                    if ((jsonProperty.Value.Type == JTokenType.String)
+                    if (jsonProperty.Value.Type == JTokenType.String
                         && (jsonProperty.Value.ToString() == "false" || jsonProperty.Value.ToString() == "true"))
                     {
                         return true;
