@@ -5,13 +5,13 @@
     <RootNamespace>ApiAnalysis</RootNamespace>
     <Title>SimpleJsonAnalyzer</Title>
     <PackageId>ApiAnalysis.SimpleJsonAnalyzer</PackageId>
-    <PackageVersion>0.2.0</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Authors>Matt Lacey</Authors>
     <PackageProjectUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Analyzer for comparing JSON and POCO types.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Pre-Release version</PackageReleaseNotes>
+    <PackageReleaseNotes>Proper 1.0 release</PackageReleaseNotes>
     <Copyright>Copyright 2017 © Matt Lacey. All rights reserved.</Copyright>
     <PackageTags>API JSON .Net POCO</PackageTags>
   </PropertyGroup>
