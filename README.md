@@ -2,6 +2,8 @@
 
 A simplified version of the JsonAnalyzer. Great for validating local JSON files or when you already have JSON in a string.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/qmbiy8arfl9fxbcl?svg=true)](https://ci.appveyor.com/project/mrlacey/simplejsonanalyzer)
+
 ## Why is it needed?
 
 - Just because something can be deserialized doesn't mean it's right.
