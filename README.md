@@ -82,9 +82,11 @@ However, SimpleJsonAnalyzer can tell you more about the differences.
 
 This tells us three things:
 
+```
 - Expected 'OtherNumber' to be of type 'Byte' but server returned a 'Integer'.
 - The JSON included the property 'Status' (with value '1') but it does not exist in class 'SimpleClass'.
 - Expected 'SimpleClass' to have a property named 'Name' but it did not exist in JSON.
+```
 
 This is helpful because:
 
