@@ -697,16 +697,27 @@ namespace ApiAnalysis
         }
 
 #pragma warning disable SA1202 // Elements must be ordered by access
+
+        // This is not supported in SimpleJsonAnalyzer
         protected virtual async Task CheckForValidContentOfTypesRetrievedFromUriConditionallyAsync(PropertyInfo pocoProperty, JToken jsonPropertyValue, JObject objectToAnalyze, List<string> result)
         {
-            // This is not supported in SimpleJsonAnalyzer
+#if NET45
+            // This does nothing but returns a completed task and can be awaited to keep the compiler happy and consistent across framework versions
+            await Task.WhenAll(new List<Task>());
+#else
             await Task.CompletedTask;
+#endif
         }
 
+        // This is not supported in SimpleJsonAnalyzer
         protected virtual async Task CheckForValidContentOfTypesRetrievedFromUriAsync(PropertyInfo pocoProperty, JToken jsonPropertyValue, List<string> result)
         {
-            // This is not supported in SimpleJsonAnalyzer
+#if NET45
+            // This does nothing but returns a completed task and can be awaited to keep the compiler happy and consistent across framework versions
+            await Task.WhenAll(new List<Task>());
+#else
             await Task.CompletedTask;
+#endif
         }
 #pragma warning restore SA1202 // Elements must be ordered by access
 
