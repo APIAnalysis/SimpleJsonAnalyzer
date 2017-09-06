@@ -30,6 +30,8 @@ namespace ApiAnalysis
             this.messageBuilder = messageBuilder ?? new SimpleJsonAnalyzerMessageBuilder();
         }
 
+        public ISimpleJsonAnalyzerMessageBuilder MessageBuilder => this.messageBuilder;
+
         public async Task<List<string>> AnalyzeJsonAsync(string jsonToAnalyze, Type typeToCompareWith)
         {
             if (string.IsNullOrEmpty(jsonToAnalyze))
