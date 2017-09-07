@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAnalysis.SimpleJsonAnalyzer", "ApiAnalysis.SimpleJsonAnalyzer\ApiAnalysis.SimpleJsonAnalyzer.csproj", "{70518710-0E6D-4E47-80FA-114BF838E76B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAnalysis.SimpleJsonAnalyzer", "ApiAnalysis.SimpleJsonAnalyzer\ApiAnalysis.SimpleJsonAnalyzer.csproj", "{70518710-0E6D-4E47-80FA-114BF838E76B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A30F73B8-D54C-459B-9D62-8DC6BE1446E5}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAnalysis.SimpleJsonAnalyzer.UnitTests", "ApiAnalysis.SimpleJsonAnalyzer.UnitTests\ApiAnalysis.SimpleJsonAnalyzer.UnitTests.csproj", "{F1423CF9-A255-4081-97B4-A208C98BACE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAnalysis.SimpleJsonAnalyzer.UnitTests45", "ApiAnalysis.SimpleJsonAnalyzer.UnitTests45\ApiAnalysis.SimpleJsonAnalyzer.UnitTests45.csproj", "{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1423CF9-A255-4081-97B4-A208C98BACE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
