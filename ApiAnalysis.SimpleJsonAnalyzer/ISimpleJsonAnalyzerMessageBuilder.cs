@@ -19,6 +19,8 @@ namespace ApiAnalysis
 
         string MissingValidJsonMessage { get; }
 
+        string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength);
+
         string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart);
 
         string UnexpectedPropertyMessage(PropertyInfo property, string reason);

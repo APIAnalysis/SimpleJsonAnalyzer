@@ -86,6 +86,9 @@
     <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringMatchesRegex.cs">
       <Link>Attributes\StringMatchesRegex.cs</Link>
     </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringMinimumLength.cs">
+      <Link>Attributes\StringMinimumLength.cs</Link>
+    </Compile>
     <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringStartsWith.cs">
       <Link>Attributes\StringStartsWith.cs</Link>
     </Compile>

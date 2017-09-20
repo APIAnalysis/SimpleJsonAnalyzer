@@ -32,6 +32,11 @@ namespace ApiAnalysis.UnitTests
 
             public string MissingValidJsonMessage { get; }
 
+            public string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
+            {
+                throw new NotImplementedException();
+            }
+
             public string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart)
             {
                 throw new NotImplementedException();

@@ -105,6 +105,18 @@ namespace ApiAnalysis
             }
         }
 
+        private void CheckForConstraintOnStringMinimumLength(PropertyInfo pocoProperty, JToken jsonPropertyValue, List<string> result)
+        {
+            var minLength = pocoProperty.GetCustomAttribute(typeof(ApiAnalysisStringMinimumLengthAttribute));
+
+            var minAcceptableLength = (minLength as ApiAnalysisStringMinimumLengthAttribute)?.MinimumAcceptableLength;
+
+            if (jsonPropertyValue.ToString().Trim().Length < minAcceptableLength)
+            {
+                result.Add(this.messageBuilder.InsufficentStringLengthMessage(pocoProperty, jsonPropertyValue.ToString(), minAcceptableLength.Value));
+            }
+        }
+
         private void CheckForConstraintOnStringStart(PropertyInfo pocoProperty, JToken jsonPropertyValue, List<string> result)
         {
             var startsWith = pocoProperty.GetCustomAttribute(typeof(ApiAnalysisStringStartsWithAttribute));
@@ -594,6 +606,7 @@ namespace ApiAnalysis
                             // Avoid checks dependent on attributes if none is present
                             if (pocoProperty.HasCustomAttribute(typeof(BaseApiAnalysisAttribute)))
                             {
+                                this.CheckForConstraintOnStringMinimumLength(pocoProperty, jsonPropertyValue, result);
                                 this.CheckForConstraintOnStringStart(pocoProperty, jsonPropertyValue, result);
                                 this.CheckForConstraintOnStingEnd(pocoProperty, jsonPropertyValue, result);
                                 this.CheckForConstraintOnStringContains(pocoProperty, jsonPropertyValue, result);

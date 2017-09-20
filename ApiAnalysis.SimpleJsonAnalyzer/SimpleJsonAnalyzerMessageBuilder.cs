@@ -86,6 +86,11 @@ namespace ApiAnalysis
                 : $"The JSON contained the property '{property.Name}' but it should not because '{reason}'.";
         }
 
+        public string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
+        {
+            return $"The value '{receivedValue}' (of property '{property.Name}') was supposed to be at least {minLength} characters long.";
+        }
+
         public string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart)
         {
             return this.ExceptionalValueMessage(receivedValue, property, "was supposed to start with", expectedStart);
