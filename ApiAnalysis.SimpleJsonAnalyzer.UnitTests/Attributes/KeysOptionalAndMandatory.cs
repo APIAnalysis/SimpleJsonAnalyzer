@@ -8,6 +8,7 @@ using System.Linq;
 using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ApiAnalysis.UnitTests.Attributes
 {
@@ -31,6 +32,21 @@ namespace ApiAnalysis.UnitTests.Attributes
             [ApiAnalysisMandatoryKeys("aa", "bb")]
             [ApiAnalysisOptionalKeys("cc", "dd")]
             public Dictionary<string, string> Items { get; set; }
+        }
+
+        public class OptionalAndMandatoryWithAliasingClass
+        {
+            [JsonIgnore]
+#pragma warning disable SA1300 // Element must begin with upper-case letter -Test needs lower-case name
+#pragma warning disable IDE1006 // Naming Styles
+            public Dictionary<string, string> items { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning restore SA1300 // Element must begin with upper-case letter
+
+            [ApiAnalysisMandatoryKeys("aa", "bb")]
+            [ApiAnalysisOptionalKeys("cc", "dd")]
+            [JsonProperty("items")]
+            public Dictionary<string, string> TestItems { get; set; }
         }
 
         [TestMethod]
@@ -266,6 +282,19 @@ namespace ApiAnalysis.UnitTests.Attributes
             var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalAndMandatoryClass)).Result;
 
             Assert.IsTrue(resp.Contains(MessageBuilder.Get.UnknownKeyMessage(PropertyInfoHelper.Get(typeof(OptionalAndMandatoryClass), nameof(OptionalAndMandatoryClass.Items)), "tt")));
+            Assert.AreEqual(1, resp.Count);
+        }
+
+        [TestMethod]
+        public void MandatoryAndOptionalKeysWithAliasing_AllMandatoryOneOptionalOneUnkown_ReportedOk()
+        {
+            var json = "{\"items\":{ \"aa\": \"good\", \"bb\": \"better\", \"dd\": \"bestest\", \"tt\": \"miraculous\" } }";
+
+            var analyzer = new SimpleJsonAnalyzer();
+
+            var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalAndMandatoryWithAliasingClass)).Result;
+
+            Assert.IsTrue(resp.Contains(MessageBuilder.Get.UnknownKeyMessage(PropertyInfoHelper.Get(typeof(OptionalAndMandatoryWithAliasingClass), nameof(OptionalAndMandatoryWithAliasingClass.TestItems)), "tt")));
             Assert.AreEqual(1, resp.Count);
         }
     }

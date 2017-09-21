@@ -36,31 +36,32 @@ namespace ApiAnalysis.UnitTests.Attributes
             Assert.IsNull(deserialized.Code);
         }
 
-        [TestMethod]
-        public void MarkedOptional_AndNotIncluded_HandledOk()
-        {
-            var json = "{\"Name\":\"1a2\",\"Value\":\"1a2\"}";
+        // TODO: Need to revisit for #6
+        ////[TestMethod]
+        ////public void MarkedOptional_AndNotIncluded_HandledOk()
+        ////{
+        ////    var json = "{\"Name\":\"1a2\",\"Value\":\"1a2\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        ////    var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
+        ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        ////    Assert.AreEqual(1, resp.Count);
+        ////    Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+        ////}
 
-        [TestMethod]
-        public void NotMarkedOptionalOrJsonIgnore_AndNotIncluded_Reported()
-        {
-            var json = "{\"Value\":\"1a2\",\"Code\":\"1a2\"}";
+        ////[TestMethod]
+        ////public void NotMarkedOptionalOrJsonIgnore_AndNotIncluded_Reported()
+        ////{
+        ////    var json = "{\"Value\":\"1a2\",\"Code\":\"1a2\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        ////    var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
+        ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(OptionalTestClass), nameof(OptionalTestClass.Name))), resp.First());
-        }
+        ////    Assert.AreEqual(1, resp.Count);
+        ////    Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(OptionalTestClass), nameof(OptionalTestClass.Name))), resp.First());
+        ////}
 
         [TestMethod]
         public void MarkedJsonIgnore_AndNotIncluded_HandledOk()

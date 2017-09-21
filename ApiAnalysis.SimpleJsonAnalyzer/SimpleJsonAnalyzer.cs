@@ -909,6 +909,13 @@ namespace ApiAnalysis
 
             foreach (var propertyInfo in type.GetProperties())
             {
+                // Skip properties that should be ignored in JSON
+                // TODO: Possibly impacts #6
+                if (propertyInfo.HasCustomAttribute(typeof(JsonIgnoreAttribute)))
+                {
+                    continue;
+                }
+
                 // We match case insensitively, like default behaviour in JSON.Net
                 if (string.Equals(propertyInfo.Name, propertyName, StringComparison.InvariantCultureIgnoreCase))
                 {
