@@ -352,5 +352,32 @@ namespace ApiAnalysis.UnitTests
             Assert.AreEqual(1, resp.Count);
             Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
         }
+
+        public class SimpleGuidTestClass
+        {
+            public Guid Value { get; set; }
+        }
+
+        private const string GuidJson = "{\"Value\":\"da42c5cd-5cd6-44f5-a733-f0a235b2f5b5\"}";
+
+        [TestMethod]
+        public void ClassWith_Guid_DeserializesOk()
+        {
+            var deserialized = JsonConvert.DeserializeObject<SimpleGuidTestClass>(GuidJson);
+
+            Assert.IsNotNull(deserialized);
+            Assert.AreEqual("da42c5cd-5cd6-44f5-a733-f0a235b2f5b5", deserialized.Value.ToString());
+        }
+
+        [TestMethod]
+        public void ClassWith_Guid_PropertyCheckedOk()
+        {
+            var analyzer = new SimpleJsonAnalyzer();
+
+            var resp = analyzer.AnalyzeJsonAsync(GuidJson, typeof(SimpleGuidTestClass)).Result;
+
+            Assert.AreEqual(1, resp.Count);
+            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+        }
     }
 }

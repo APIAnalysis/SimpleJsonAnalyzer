@@ -833,7 +833,10 @@ namespace ApiAnalysis
                     break;
 
                 case "Uri":
-                    return Uri.TryCreate(jsonProperty.Value.ToString(), UriKind.Absolute, out Uri ignored);
+                    return Uri.TryCreate(jsonProperty.Value.ToString(), UriKind.Absolute, out Uri ignoredUri);
+
+                case "Guid":
+                    return Guid.TryParse(jsonProperty.Value.ToString(), out Guid ignoredGuid);
             }
 
             // Allow an empty array to be treated as null - because some APIs work that way!
