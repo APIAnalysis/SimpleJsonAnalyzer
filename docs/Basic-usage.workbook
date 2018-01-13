@@ -1,0 +1,43 @@
+---
+packages:
+- id: ApiAnalysis.SimpleJsonAnalyzer
+  version: 1.2.0
+- id: Newtonsoft.Json
+  version: 10.0.3
+id: 84f9b22d-2b9f-4fdb-8c43-0b1efb85a362
+title: Basic-usage
+uti: com.xamarin.workbook
+platforms:
+- Console
+---
+
+# Basic usage
+
+Say you wanted to deserialize some JSON to a POCO type.
+
+```csharp
+public class SimpleClass
+{
+        public byte Number { get; set; }   
+        public byte OtherNumber { get; set; }
+        public string Name { get; set; }      
+}
+
+var jsonString = "{\"Number\":2, \"OtherNumber\":23445,\"Status\":1}";
+```
+
+Just deserializing a JSON response ignores lots and has poor error messages.
+
+```csharp
+#r "Newtonsoft.Json"
+Newtonsoft.Json.JsonConvert.DeserializeObject<SimpleClass>(jsonString);
+```
+
+The analyzer looks at the JSON & POCO and is able to tell us more:
+
+```csharp
+#r "ApiAnalysis.SimpleJsonAnalyzer"
+
+var analyzer = new ApiAnalysis.SimpleJsonAnalyzer();
+var results = await analyzer.AnalyzeJsonAsync(jsonString, typeof(SimpleClass));
+```
