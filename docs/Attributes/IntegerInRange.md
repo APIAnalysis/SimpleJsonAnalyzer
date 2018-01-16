@@ -1,6 +1,6 @@
 # ApiAnalysisIntegerInRangeAttribute
 
-After applying this attribute to an `Integer property, the JSON value must be within the range of the specified numbers (inclusive.) If the JSON value is outside of the range then an appropriate message will be returned.
+After applying this attribute to an `Integer` property, the JSON value must be within the range of the specified numbers (inclusive.) If the JSON value is outside of the range then an appropriate message will be returned.
 
 ## Parameters
 
