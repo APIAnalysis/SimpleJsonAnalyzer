@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApiAnalysis.SimpleJsonAnalyzer.vsixuse.UnitTests</RootNamespace>
+    <AssemblyName>ApiAnalysis.SimpleJsonAnalyzer.vsixuse.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Arrays.cs">
+      <Link>Arrays.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\CollectionMayNotBeEmpty.cs">
+      <Link>Attributes\CollectionMayNotBeEmpty.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\IgnoreBoundaryChecks.cs">
+      <Link>Attributes\IgnoreBoundaryChecks.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\IgnoreTypeDifferenceFor.cs">
+      <Link>Attributes\IgnoreTypeDifferenceFor.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\IntegerInRange.cs">
+      <Link>Attributes\IntegerInRange.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\KeysOptionalAndMandatory.cs">
+      <Link>Attributes\KeysOptionalAndMandatory.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\Optional.cs">
+      <Link>Attributes\Optional.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\ShouldNotBeInJson.cs">
+      <Link>Attributes\ShouldNotBeInJson.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringContains.cs">
+      <Link>Attributes\StringContains.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringEndsWith.cs">
+      <Link>Attributes\StringEndsWith.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringMatchesRegex.cs">
+      <Link>Attributes\StringMatchesRegex.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringMinimumLength.cs">
+      <Link>Attributes\StringMinimumLength.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\StringStartsWith.cs">
+      <Link>Attributes\StringStartsWith.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Attributes\ValidValues.cs">
+      <Link>Attributes\ValidValues.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\BasicExceptions.cs">
+      <Link>BasicExceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\BasicTypes.cs">
+      <Link>BasicTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\BasicValidJsonParsing.cs">
+      <Link>BasicValidJsonParsing.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Bools.cs">
+      <Link>Bools.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\BoundaryChecks.cs">
+      <Link>BoundaryChecks.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Dates.cs">
+      <Link>Dates.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Dictionary.cs">
+      <Link>Dictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Enums.cs">
+      <Link>Enums.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Extras\FailingConverter.cs">
+      <Link>Extras\FailingConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Extras\ListOrSingleItemConverter.cs">
+      <Link>Extras\ListOrSingleItemConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Generics.cs">
+      <Link>Generics.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Helpers\PropertyInfoHelper.cs">
+      <Link>Helpers\PropertyInfoHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\IEnumerables.cs">
+      <Link>IEnumerables.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Inheritence.cs">
+      <Link>Inheritence.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\InvalidJson.cs">
+      <Link>InvalidJson.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\JsonFormatting.cs">
+      <Link>JsonFormatting.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Lists.cs">
+      <Link>Lists.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\MessageBuilder.cs">
+      <Link>MessageBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\MessageBuilderTests.cs">
+      <Link>MessageBuilderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\MissingProperties.cs">
+      <Link>MissingProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\NestedTypes.cs">
+      <Link>NestedTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\Nulls.cs">
+      <Link>Nulls.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\ReadOnlyProperties.cs">
+      <Link>ReadOnlyProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\TypeDifferences.cs">
+      <Link>TypeDifferences.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\UnexpectedResponse.cs">
+      <Link>UnexpectedResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\WorksWithAlternatePropertyNames.cs">
+      <Link>WorksWithAlternatePropertyNames.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\WorksWithCustomConverters.cs">
+      <Link>WorksWithCustomConverters.cs</Link>
+    </Compile>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer.UnitTests\WorksWithSumTypes.cs">
+      <Link>WorksWithSumTypes.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApiAnalysis.SimpleJsonAnalyzer.vsixuse\ApiAnalysis.SimpleJsonAnalyzer.vsixuse.csproj">
+      <Project>{d7f4aa2f-03f8-4a5d-8d21-21ad9d06f3ad}</Project>
+      <Name>ApiAnalysis.SimpleJsonAnalyzer.vsixuse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
+</Project>
