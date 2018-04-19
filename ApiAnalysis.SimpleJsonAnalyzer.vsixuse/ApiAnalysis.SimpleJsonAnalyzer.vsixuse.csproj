@@ -5,18 +5,21 @@
     <RootNamespace>ApiAnalysis</RootNamespace>
     <Title>SimpleJsonAnalyzer.vsixuse</Title>
     <PackageId>ApiAnalysis.SimpleJsonAnalyzer.vsixuse</PackageId>
-    <PackageVersion>1.5.0</PackageVersion>
+    <PackageVersion>1.6.2</PackageVersion>
     <Authors>Matt Lacey</Authors>
     <PackageProjectUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Analyzer for comparing JSON and POCO types. Packaged for use in a VSIX project.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Initial VSIX version</PackageReleaseNotes>
+    <PackageReleaseNotes>Strong name test</PackageReleaseNotes>
     <Copyright>Copyright 2018 © Matt Lacey. All rights reserved.</Copyright>
     <PackageTags>API JSON .Net POCO VSIX</PackageTags>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <Version>1.5.0</Version>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
+    <Version>1.6.2</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SimpleJsonAnalyzer.vsixuse.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="[8.0.3]" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
 
