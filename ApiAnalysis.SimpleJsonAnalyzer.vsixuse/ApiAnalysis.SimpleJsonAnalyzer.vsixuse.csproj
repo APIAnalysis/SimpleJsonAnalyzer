@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <RootNamespace>ApiAnalysis</RootNamespace>
+    <Title>SimpleJsonAnalyzer.vsixuse</Title>
+    <PackageId>ApiAnalysis.SimpleJsonAnalyzer.vsixuse</PackageId>
+    <PackageVersion>1.5.0</PackageVersion>
+    <Authors>Matt Lacey</Authors>
+    <PackageProjectUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Analyzer for comparing JSON and POCO types. Packaged for use in a VSIX project.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Initial VSIX version</PackageReleaseNotes>
+    <Copyright>Copyright 2018 © Matt Lacey. All rights reserved.</Copyright>
+    <PackageTags>API JSON .Net POCO VSIX</PackageTags>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <Version>1.5.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer\*.cs" />
+    <Compile Include="..\ApiAnalysis.SimpleJsonAnalyzer\Attributes\*.cs" />
+    <AdditionalFiles Include="..\StyleCop.json" Link="StyleCop.json" />
+    <Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAnalysis.SimpleJsonAnaly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAnalysis.SimpleJsonAnalyzer.UnitTests45", "ApiAnalysis.SimpleJsonAnalyzer.UnitTests45\ApiAnalysis.SimpleJsonAnalyzer.UnitTests45.csproj", "{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAnalysis.SimpleJsonAnalyzer.vsixuse", "ApiAnalysis.SimpleJsonAnalyzer.vsixuse\ApiAnalysis.SimpleJsonAnalyzer.vsixuse.csproj", "{D7F4AA2F-03F8-4A5D-8D21-21AD9D06F3AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAnalysis.SimpleJsonAnalyzer.vsixuse.UnitTests", "ApiAnalysis.SimpleJsonAnalyzer.vsixuse.UnitTests\ApiAnalysis.SimpleJsonAnalyzer.vsixuse.UnitTests.csproj", "{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC08E7E-2B0D-4CBB-AB3A-66F7BF170867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7F4AA2F-03F8-4A5D-8D21-21AD9D06F3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7F4AA2F-03F8-4A5D-8D21-21AD9D06F3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7F4AA2F-03F8-4A5D-8D21-21AD9D06F3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7F4AA2F-03F8-4A5D-8D21-21AD9D06F3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7EF3522-BAF0-47FA-A8B6-DB7549D6AECF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
