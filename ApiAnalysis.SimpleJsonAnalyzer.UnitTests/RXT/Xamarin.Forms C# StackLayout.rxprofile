@@ -1,0 +1,128 @@
+{
+  "Name": "Xamarin.Forms C# StackLayout",
+  "ClassGrouping": "StackLayout",
+  "FallbackOutput": "<Label Text=\"{Binding $name$}\" />",
+  "SubPropertyOutput": "<Label Text=\"{Binding $name$}\" />",
+  "EnumMemberOutput": " <x:String>$elementwithspaces$</x:String>",
+  "Mappings": [
+    {
+      "Type": "String",
+      "NameContains": "",
+      "IfReadOnly": true,
+      "Output": "<Label Text=\"{Binding $name$, Mode=TwoWay}\" />"
+    },
+    {
+      "Type": "String",
+      "NameContains": "",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Default\" Text=\"{Binding $name$}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "string",
+      "NameContains": "phone|tel",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Telephone\" Text=\"{Binding $name$, Mode=TwoWay}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "string",
+      "NameContains": "email",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Email\" Text=\"{Binding $name$, Mode=TwoWay}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "string",
+      "NameContains": "uri|url",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Url\" Text=\"{Binding $name$, Mode=TwoWay}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "string",
+      "NameContains": "chat|message",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Chat\" Text=\"{Binding $name$, Mode=TwoWay}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "string",
+      "NameContains": "search",
+      "IfReadOnly": false,
+      "Output": "<SearchBar PlaceholderText=\"Search\" QueryText=\"{Binding $name$, Mode=TwoWay}\" />"
+    },
+    {
+      "Type": "String",
+      "NameContains": "password|pwd",
+      "IfReadOnly": false,
+      "Output": "<Entry IsPassword=\"True\" Text=\"{Binding $name$, Mode=TwoWay}\" />"
+    },
+    {
+      "Type": "bool",
+      "NameContains": "busy|active",
+      "IfReadOnly": false,
+      "Output": "<ActivityIndicator IsRunning=\"{Binding $name$}\" />"
+    },
+    {
+      "Type": "int|Integer|long|double|float",
+      "NameContains": "",
+      "IfReadOnly": true,
+      "Output": "<Label Text=\"{Binding $name$}\" />"
+    },
+    {
+      "Type": "int|Integer|long|double|float",
+      "NameContains": "",
+      "IfReadOnly": false,
+      "Output": "<Entry Keyboard=\"Numeric\" Text=\"{Binding $name$, Mode=TwoWay}\" Placeholder=\"$name$\" />"
+    },
+    {
+      "Type": "DateTime|DateTimeOffset",
+      "NameContains": "date",
+      "IfReadOnly": false,
+      "Output": "<DatePicker Date=\"{Binding $name$, Mode=TwoWay}\" />"
+    },
+    {
+      "Type": "DateTime|DateTimeOffset",
+      "NameContains": "time",
+      "IfReadOnly": false,
+      "Output": "<TimePicker Time=\"{Binding $name$, Mode=TwoWay}\" />"
+    },
+    {
+      "Type": "DateTime|DateTimeOffset",
+      "NameContains": "",
+      "IfReadOnly": true,
+      "Output": "<Label Text=\"{Binding $name$}\" />"
+    },
+    {
+      "Type": "ICommand|Command|RelayCommand",
+      "NameContains": "",
+      "IfReadOnly": false,
+      "Output": "<Button Text=\"$name$\" Command=\"{Binding $name$}\" />"
+    },
+    {
+      "Type": "ObservableCollection<T>|List<T>",
+      "NameContains": "",
+      "IfReadOnly": false,
+      "Output": "<ListView ItemsSource=\"{Binding $name$}\"><ListView.ItemTemplate><DataTemplate><ViewCell><StackLayout>$subprops$</StackLayout></ViewCell></DataTemplate></ListView.ItemTemplate></ListView>"
+    },
+    {
+      "Type": "enum",
+      "NameContains": "",
+      "IfReadOnly": false,
+      "Output": "<Picker Title=\"$name$\"><Picker.Items>$members$</Picker.Items></Picker>"
+    }
+  ],
+  "ViewGeneration": {
+    "XamlPlaceholder": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<ContentPage xmlns=\"http://xamarin.com/schemas/2014/forms\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2009/xaml\"\r\n             x:Class=\"$viewns$.$viewclass$\"\r\n             Title=\"{Binding Title}\"\r\n             x:Name=\"BrowseItemsPage\">\r\n    <ContentPage.Content>\r\n        $genxaml$\r\n    </ContentPage.Content>\r\n</ContentPage>\r\n",
+    "CodePlaceholder": "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\n\r\nusing Xamarin.Forms;\r\nusing Xamarin.Forms.Xaml;\r\n\r\nusing $viewmodelns$;\r\n\r\nnamespace CsXf.Views\r\n{\r\n    [XamlCompilation(XamlCompilationOptions.Compile)]\r\n    public partial class $viewclass$ : ContentPage\r\n    {\r\n        $viewmodelclass$ viewModel;\r\n\r\n        public $viewclass$()\r\n        {\r\n            InitializeComponent();\r\n\r\n            BindingContext = viewModel = new $viewmodelclass$();\r\n        }\r\n    }\r\n}\r\n",
+    "XamlFileSuffix": "Page",
+    "ViewModelFileSuffix": "ViewModel",
+    "XamlFileDirectoryName": "Views",
+    "ViewModelDirectoryName": "ViewModels",
+    "AllInSameProject": true,
+    "XamlProjectSuffix": "n/a",
+    "ViewModelProjectSuffix": "n/a"
+  },
+  "Datacontext": {
+    "XamlPageAttribute": "",
+    "CodeBehindPageContent": "$viewmodelclass$ viewModel;",
+    "CodeBehindConstructorContent": "BindingContext = viewModel = new $viewmodelclass$();",
+    "DefaultCodeBehindConstructor": "public $viewclass$()\r\n{\r\n    InitializeComponent();\r\n}"
+  }
+}
