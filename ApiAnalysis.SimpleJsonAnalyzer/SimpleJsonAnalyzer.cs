@@ -283,6 +283,7 @@ namespace ApiAnalysis
                 .Replace("IReadOnlyList`1", "Array")
                 .Replace("List`1", "Array")
                 .Replace("IEnumerable`1", "Array")
+                .Replace("ObservableCollection`1", "Array")
                 .Replace("IReadOnlyDictionary`2", "Dictionary");
         }
 

@@ -4,6 +4,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,6 +30,11 @@ namespace ApiAnalysis.UnitTests
         public class SimpleIEnumerableTestWithNestedClass
         {
             public IEnumerable<Child> Kids { get; set; }
+        }
+
+        public class SimpleObservableCollectionTestWithNestedClass
+        {
+            public ObservableCollection<Child> Kids { get; set; }
         }
 
         public class Child
@@ -85,6 +91,32 @@ namespace ApiAnalysis.UnitTests
             var analyzer = new SimpleJsonAnalyzer();
 
             var resp = analyzer.AnalyzeJsonAsync(json, typeof(IEnumerable<Child>)).Result;
+
+            Assert.AreEqual(1, resp.Count);
+            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+        }
+
+        [TestMethod]
+        public void OfComplexTypesAsProperty_HandledOk()
+        {
+            var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
+
+            var analyzer = new SimpleJsonAnalyzer();
+
+            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestWithNestedClass)).Result;
+
+            Assert.AreEqual(1, resp.Count);
+            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+        }
+
+        [TestMethod]
+        public void ObservableCollectionAsProperty_HandledOk()
+        {
+            var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
+
+            var analyzer = new SimpleJsonAnalyzer();
+
+            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleObservableCollectionTestWithNestedClass)).Result;
 
             Assert.AreEqual(1, resp.Count);
             Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
