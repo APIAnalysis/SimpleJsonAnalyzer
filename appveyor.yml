@@ -1,0 +1,7 @@
+
+skip_commits:
+  files:
+    - assets/*
+    - docs/*
+    - '**/*.md'
+    
