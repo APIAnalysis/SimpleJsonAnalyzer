@@ -3,6 +3,7 @@
 A simplified version of the JsonAnalyzer. Great for validating local JSON files or when you already have JSON in a string.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/qmbiy8arfl9fxbcl?svg=true)](https://ci.appveyor.com/project/mrlacey/simplejsonanalyzer)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## Why is it needed?
 
