@@ -99,5 +99,4 @@ This is helpful because:
 
 more docs to follow...
 
-
 Powered, in part, by [JSON.Net](https://www.newtonsoft.com/json).
