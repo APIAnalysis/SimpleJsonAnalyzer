@@ -96,7 +96,6 @@ This is helpful because:
 - It can be run even when JSON can be deserialized without issue.
 - It can provide additional information when a deserialization error occurs.
 
-
 more docs to follow...
 
 Powered, in part, by [JSON.Net](https://www.newtonsoft.com/json).
