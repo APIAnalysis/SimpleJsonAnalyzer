@@ -1,22 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net45;net462</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>ApiAnalysis</RootNamespace>
     <Title>SimpleJsonAnalyzer</Title>
     <PackageId>ApiAnalysis.SimpleJsonAnalyzer</PackageId>
-    <PackageVersion>1.4.0</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <Authors>Matt Lacey</Authors>
     <PackageProjectUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/APIAnalysis/SimpleJsonAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Analyzer for comparing JSON and POCO types.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Fix bug with Ignored POCO properties</PackageReleaseNotes>
-    <Copyright>Copyright 2017 © Matt Lacey. All rights reserved.</Copyright>
-    <PackageTags>API JSON .Net POCO</PackageTags>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <Version>1.4.0</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Now targets netstandard2.0 and references json.net 12.0.2</PackageReleaseNotes>
+    <Copyright>Copyright 2021 © Matt Lacey. All rights reserved.</Copyright>
+    <PackageTags>API;JSON;.Net;POCO</PackageTags>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <Version>2.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +26,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="NuGet.CommandLine" Version="5.8.1" GeneratePackagePath="true">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+  <Import Project="..\signnupkg.targets" />
 </Project>

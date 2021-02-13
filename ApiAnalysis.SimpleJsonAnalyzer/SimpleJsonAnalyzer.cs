@@ -271,7 +271,7 @@ namespace ApiAnalysis
             publicProperty.SetGetMethod(getterMethod);
             publicProperty.SetSetMethod(setterMethod);
 
-            var genType = typeBuilder.CreateType();
+            var genType = typeBuilder.CreateTypeInfo().AsType();
             return genType;
         }
 
@@ -834,10 +834,14 @@ namespace ApiAnalysis
                     break;
 
                 case "Uri":
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
                     return Uri.TryCreate(jsonProperty.Value.ToString(), UriKind.Absolute, out Uri ignoredUri);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
                 case "Guid":
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
                     return Guid.TryParse(jsonProperty.Value.ToString(), out Guid ignoredGuid);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
             }
 
             // Allow an empty array to be treated as null - because some APIs work that way!

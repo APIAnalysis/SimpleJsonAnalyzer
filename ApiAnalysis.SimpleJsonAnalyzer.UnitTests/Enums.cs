@@ -18,7 +18,7 @@ namespace ApiAnalysis.UnitTests
         {
             Red,
             Green,
-            Blue
+            Blue,
         }
 
         public class SimpleClass
