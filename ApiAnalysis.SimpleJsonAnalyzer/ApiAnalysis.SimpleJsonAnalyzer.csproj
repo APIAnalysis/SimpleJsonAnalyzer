@@ -35,7 +35,7 @@
   </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NuGet.CommandLine" Version="5.9.3" GeneratePackagePath="true">
+        <PackageReference Include="NuGet.CommandLine" Version="6.0.5" GeneratePackagePath="true">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
