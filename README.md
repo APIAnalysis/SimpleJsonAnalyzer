@@ -4,6 +4,7 @@ A simplified version of the JsonAnalyzer. Great for validating local JSON files 
 
 [![Build status](https://ci.appveyor.com/api/projects/status/qmbiy8arfl9fxbcl?svg=true)](https://ci.appveyor.com/project/mrlacey/simplejsonanalyzer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Nuget](https://img.shields.io/nuget/dt/ApiAnalysis.SimpleJsonAnalyzer)
 ![Install from NuGet](https://img.shields.io/nuget/v/ApiAnalysis.SimpleJsonAnalyzer)
 
 ## Why is it needed?
