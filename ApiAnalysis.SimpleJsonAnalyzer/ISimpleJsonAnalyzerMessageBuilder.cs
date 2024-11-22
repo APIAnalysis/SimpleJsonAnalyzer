@@ -1,4 +1,4 @@
-// <copyright file="ISimpleJsonAnalyzerMessageBuilder.cs" company="Matt Lacey">
+﻿// <copyright file="ISimpleJsonAnalyzerMessageBuilder.cs" company="Matt Lacey">
 // Copyright (c) Matt Lacey. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
@@ -19,7 +19,7 @@ namespace ApiAnalysis
 
         string MissingValidJsonMessage { get; }
 
-        string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength);
+        string InsufficientStringLengthMessage(PropertyInfo property, string receivedValue, int minLength);
 
         string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart);
 

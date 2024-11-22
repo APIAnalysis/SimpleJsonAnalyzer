@@ -1,4 +1,4 @@
-// <copyright file="MessageBuilderTests.cs" company="Matt Lacey">
+﻿// <copyright file="MessageBuilderTests.cs" company="Matt Lacey">
 // Copyright (c) Matt Lacey. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
@@ -32,7 +32,7 @@ namespace ApiAnalysis.UnitTests
 
             public string MissingValidJsonMessage { get; }
 
-            public string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
+            public string InsufficientStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
             {
                 throw new NotImplementedException();
             }
