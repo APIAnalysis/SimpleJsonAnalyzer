@@ -2,10 +2,12 @@
 
 A simplified version of the JsonAnalyzer. Great for validating local JSON files or when you already have JSON in a string.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/qmbiy8arfl9fxbcl?svg=true)](https://ci.appveyor.com/project/mrlacey/simplejsonanalyzer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ![Nuget](https://img.shields.io/nuget/dt/ApiAnalysis.SimpleJsonAnalyzer)
 ![Install from NuGet](https://img.shields.io/nuget/v/ApiAnalysis.SimpleJsonAnalyzer)
+
+[![Build](https://github.com/mrlacey/SimpleJsonAnalyzer/actions/workflows/build.yaml/badge.svg)](https://github.com/mrlacey/SimpleJsonAnalyzer/actions/workflows/build.yaml)
+![Tests](https://gist.githubusercontent.com/mrlacey/c586ff0f495b4a8dd76ab0dbdf9c89e0/raw/SimpleJsonAnalyzer.badge.svg)
 
 ## Why is it needed?
 
