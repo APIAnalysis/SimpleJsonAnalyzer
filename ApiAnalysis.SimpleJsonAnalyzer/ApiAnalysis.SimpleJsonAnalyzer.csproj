@@ -1,47 +1,49 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>ApiAnalysis</RootNamespace>
-    <Title>SimpleJsonAnalyzer</Title>
-    <PackageId>ApiAnalysis.SimpleJsonAnalyzer</PackageId>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>ApiAnalysis</RootNamespace>
+		<Title>SimpleJsonAnalyzer</Title>
+		<PackageId>ApiAnalysis.SimpleJsonAnalyzer</PackageId>
 
-    <PackageVersion>3.0.0</PackageVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <Version>3.0.0</Version>
-    <PackageReleaseNotes>Now references json.net 13.0.3</PackageReleaseNotes>
+		<PackageVersion>3.0.0</PackageVersion>
+		<AssemblyVersion>3.0.0.0</AssemblyVersion>
+		<Version>3.0.0</Version>
+		<PackageReleaseNotes>Now references json.net 13.0.3</PackageReleaseNotes>
 
-    <Authors>Matt Lacey</Authors>
-    <PackageProjectUrl>https://github.com/mrlacey/SimpleJsonAnalyzer</PackageProjectUrl>
-    <Description>Analyzer for comparing JSON and POCO types.</Description>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright 2024 © Matt Lacey. All rights reserved.</Copyright>
-    <PackageTags>API;JSON;.Net;POCO; C#; CSharp</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageReadmeFile>readme.md</PackageReadmeFile>
-  </PropertyGroup>
+		<Authors>Matt Lacey</Authors>
+		<PackageProjectUrl>https://github.com/mrlacey/SimpleJsonAnalyzer</PackageProjectUrl>
+		<Description>Analyzer for comparing JSON and POCO types.</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Copyright>Copyright 2024 © Matt Lacey. All rights reserved.</Copyright>
+		<PackageTags>API;JSON;.Net;POCO; C#; CSharp</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-	  <None Include="readme.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
+		<None Include="icon.png" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="NuGet.CommandLine" Version="6.12.1" GeneratePackagePath="true">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="WarnAboutTODOs" Version="1.7.0">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NuGet.CommandLine" Version="6.12.1" GeneratePackagePath="true">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="WarnAboutTODOs" Version="1.7.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <Import Project="..\signnupkg.targets" />
+	<Import Project="..\signnupkg.targets" />
 </Project>
