@@ -1,4 +1,4 @@
-// <copyright file="StringMinimumLength.cs" company="Matt Lacey">
+﻿// <copyright file="StringMinimumLength.cs" company="Matt Lacey">
 // Copyright (c) Matt Lacey. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
@@ -66,7 +66,7 @@ namespace ApiAnalysis.UnitTests.Attributes
             var resp = analyzer.AnalyzeJsonAsync(json, typeof(MinLenTestClass)).Result;
 
             Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.InsufficentStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), "123", 4), resp.First());
+            Assert.AreEqual(MessageBuilder.Get.InsufficientStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), "123", 4), resp.First());
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace ApiAnalysis.UnitTests.Attributes
             var resp = analyzer.AnalyzeJsonAsync(json, typeof(MinLenTestClass)).Result;
 
             Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.InsufficentStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), string.Empty, 4), resp.First());
+            Assert.AreEqual(MessageBuilder.Get.InsufficientStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), string.Empty, 4), resp.First());
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace ApiAnalysis.UnitTests.Attributes
             var resp = analyzer.AnalyzeJsonAsync(json, typeof(MinLenTestClass)).Result;
 
             Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.InsufficentStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), null, 4), resp.First());
+            Assert.AreEqual(MessageBuilder.Get.InsufficientStringLengthMessage(PropertyInfoHelper.Get(typeof(MinLenTestClass), nameof(MinLenTestClass.Name)), null, 4), resp.First());
         }
     }
 }

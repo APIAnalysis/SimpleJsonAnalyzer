@@ -1,4 +1,4 @@
-// <copyright file="SimpleJsonAnalyzer.cs" company="Matt Lacey">
+﻿// <copyright file="SimpleJsonAnalyzer.cs" company="Matt Lacey">
 // Copyright (c) Matt Lacey. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
@@ -113,7 +113,7 @@ namespace ApiAnalysis
 
             if (jsonPropertyValue.ToString().Trim().Length < minAcceptableLength)
             {
-                result.Add(this.messageBuilder.InsufficentStringLengthMessage(pocoProperty, jsonPropertyValue.ToString(), minAcceptableLength.Value));
+                result.Add(this.messageBuilder.InsufficientStringLengthMessage(pocoProperty, jsonPropertyValue.ToString(), minAcceptableLength.Value));
             }
         }
 
@@ -712,8 +712,6 @@ namespace ApiAnalysis
             return result;
         }
 
-#pragma warning disable SA1202 // Elements must be ordered by access
-
         // This is not supported in SimpleJsonAnalyzer
         protected virtual async Task CheckForValidContentOfTypesRetrievedFromUriConditionallyAsync(PropertyInfo pocoProperty, JToken jsonPropertyValue, JObject objectToAnalyze, List<string> result)
         {
@@ -735,7 +733,6 @@ namespace ApiAnalysis
             await Task.CompletedTask;
 #endif
         }
-#pragma warning restore SA1202 // Elements must be ordered by access
 
         private bool CanProcessWithConverter(JProperty jsonProperty, PropertyInfo pocoProperty, List<string> result)
         {
