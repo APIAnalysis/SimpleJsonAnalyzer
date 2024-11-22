@@ -21,15 +21,21 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageIcon>icon.png</PackageIcon>
+
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
-		<None Include="icon.png" Pack="true" PackagePath="\"/>
+		<None Include="icon.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
 	</ItemGroup>
