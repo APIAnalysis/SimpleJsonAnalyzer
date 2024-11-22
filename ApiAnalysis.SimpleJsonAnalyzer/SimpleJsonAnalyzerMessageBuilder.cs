@@ -27,7 +27,7 @@ namespace ApiAnalysis
 
         public string ArrayOfUnexpectedTypeMessage(Type expectedType, JTokenType receivedType)
         {
-            return $"Expected an arry of '{expectedType.Name}' but JSON contained '{receivedType}'.";
+            return $"Expected an array of '{expectedType.Name}' but JSON contained '{receivedType}'.";
         }
 
         public string InvalidPropertyValueMessage(string unexpectedValue, PropertyInfo property)
@@ -86,7 +86,7 @@ namespace ApiAnalysis
                 : $"The JSON contained the property '{property.Name}' but it should not because '{reason}'.";
         }
 
-        public string InsufficentStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
+        public string InsufficientStringLengthMessage(PropertyInfo property, string receivedValue, int minLength)
         {
             return $"The value '{receivedValue}' (of property '{property.Name}') was supposed to be at least {minLength} characters long.";
         }

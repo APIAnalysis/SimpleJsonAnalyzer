@@ -23,9 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
-	  <None Include="readme.md" Pack="true" PackagePath="\"/>
+	  <None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

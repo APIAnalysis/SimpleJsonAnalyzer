@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="RXT\Xamarin.Forms C# StackLayout.rxprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
