@@ -20,24 +20,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\StyleCop.json" Link="StyleCop.json" />
     <Compile Include="..\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NuGet.CommandLine" Version="6.0.6" GeneratePackagePath="true">
+        <PackageReference Include="NuGet.CommandLine" Version="6.12.1" GeneratePackagePath="true">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="WarnAboutTODOs" Version="1.7.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
