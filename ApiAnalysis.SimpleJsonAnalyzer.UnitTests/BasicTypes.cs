@@ -11,373 +11,372 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class BasicTypes
 {
-    [TestClass]
-    public class BasicTypes
+    public class SimpleByteTestClass
     {
-        public class SimpleByteTestClass
-        {
-            public byte Value { get; set; }
-        }
+        public byte Value { get; set; }
+    }
 
-        private const string ByteJson = "{\"Value\":45}";
+    private const string ByteJson = "{\"Value\":45}";
 
-        [TestMethod]
-        public void ClassWith_Byte_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleByteTestClass>(ByteJson);
+    [TestMethod]
+    public void ClassWith_Byte_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleByteTestClass>(ByteJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(45, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(45, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Byte_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Byte_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(ByteJson, typeof(SimpleByteTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(ByteJson, typeof(SimpleByteTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleIntTestClass
-        {
-            public int Value { get; set; }
-        }
+    public class SimpleIntTestClass
+    {
+        public int Value { get; set; }
+    }
 
-        private const string IntJson = "{\"Value\":4500}";
+    private const string IntJson = "{\"Value\":4500}";
 
-        [TestMethod]
-        public void ClassWith_Int_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleIntTestClass>(IntJson);
+    [TestMethod]
+    public void ClassWith_Int_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleIntTestClass>(IntJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(4500, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(4500, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Int_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Int_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(IntJson, typeof(SimpleIntTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(IntJson, typeof(SimpleIntTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleLongTestClass
-        {
-            public long Value { get; set; }
-        }
+    public class SimpleLongTestClass
+    {
+        public long Value { get; set; }
+    }
 
-        private const string LongJson = "{\"Value\":87622034350120366}";
+    private const string LongJson = "{\"Value\":87622034350120366}";
 
-        [TestMethod]
-        public void ClassWith_Long_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleLongTestClass>(LongJson);
+    [TestMethod]
+    public void ClassWith_Long_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleLongTestClass>(LongJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(87622034350120366, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(87622034350120366, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Long_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Long_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(LongJson, typeof(SimpleLongTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(LongJson, typeof(SimpleLongTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleBoolTestClass
-        {
-            public bool Value { get; set; }
-        }
+    public class SimpleBoolTestClass
+    {
+        public bool Value { get; set; }
+    }
 
-        private const string BoolJson = "{\"Value\":true}";
+    private const string BoolJson = "{\"Value\":true}";
 
-        [TestMethod]
-        public void ClassWith_Bool_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleBoolTestClass>(BoolJson);
+    [TestMethod]
+    public void ClassWith_Bool_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleBoolTestClass>(BoolJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(true, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(true, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Bool_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Bool_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(BoolJson, typeof(SimpleBoolTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(BoolJson, typeof(SimpleBoolTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleStringTestClass
-        {
-            public string Value { get; set; }
-        }
+    public class SimpleStringTestClass
+    {
+        public string Value { get; set; }
+    }
 
-        private const string StringJson = "{\"Value\":\"abcde\"}";
+    private const string StringJson = "{\"Value\":\"abcde\"}";
 
-        [TestMethod]
-        public void ClassWith_String_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleStringTestClass>(StringJson);
+    [TestMethod]
+    public void ClassWith_String_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleStringTestClass>(StringJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("abcde", deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("abcde", deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_String_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_String_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(StringJson, typeof(SimpleStringTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(StringJson, typeof(SimpleStringTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleArrayTestClass
-        {
-            public byte[] Value { get; set; }
-        }
+    public class SimpleArrayTestClass
+    {
+        public byte[] Value { get; set; }
+    }
 
-        private const string ArrayJson = "{\"Value\":[4,5,6]}";
+    private const string ArrayJson = "{\"Value\":[4,5,6]}";
 
-        [TestMethod]
-        public void ClassWith_Array_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleArrayTestClass>(ArrayJson);
+    [TestMethod]
+    public void ClassWith_Array_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleArrayTestClass>(ArrayJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(3, deserialized.Value.Length);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(3, deserialized.Value.Length);
+    }
 
-        [TestMethod]
-        public void ClassWith_Array_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Array_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(ArrayJson, typeof(SimpleArrayTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(ArrayJson, typeof(SimpleArrayTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleListTestClass
-        {
-            public List<byte> Value { get; set; }
-        }
+    public class SimpleListTestClass
+    {
+        public List<byte> Value { get; set; }
+    }
 
-        private const string ListJson = "{\"Value\":[4,5,6]}";
+    private const string ListJson = "{\"Value\":[4,5,6]}";
 
-        [TestMethod]
-        public void ClassWith_List_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleListTestClass>(ListJson);
+    [TestMethod]
+    public void ClassWith_List_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleListTestClass>(ListJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(3, deserialized.Value.Count);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(3, deserialized.Value.Count);
+    }
 
-        [TestMethod]
-        public void ClassWith_List_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_List_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(ListJson, typeof(SimpleListTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(ListJson, typeof(SimpleListTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleUriTestClass
-        {
-            public Uri Value { get; set; }
-        }
+    public class SimpleUriTestClass
+    {
+        public Uri Value { get; set; }
+    }
 
-        private const string UriJson = "{\"Value\":\"http://mrlacey.com/\"}";
+    private const string UriJson = "{\"Value\":\"http://mrlacey.com/\"}";
 
-        [TestMethod]
-        public void ClassWith_Uri_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleUriTestClass>(UriJson);
+    [TestMethod]
+    public void ClassWith_Uri_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleUriTestClass>(UriJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(new Uri("http://mrlacey.com/").AbsoluteUri, deserialized.Value.AbsoluteUri);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(new Uri("http://mrlacey.com/").AbsoluteUri, deserialized.Value.AbsoluteUri);
+    }
 
-        [TestMethod]
-        public void ClassWith_Uri_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Uri_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(UriJson, typeof(SimpleUriTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(UriJson, typeof(SimpleUriTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void ClassWith_InvalidUri_DetectedCorrectly()
-        {
-            string invalidUriJson = "{\"Value\":\"not-a-valid-uri\"}";
+    [TestMethod]
+    public void ClassWith_InvalidUri_DetectedCorrectly()
+    {
+        string invalidUriJson = "{\"Value\":\"not-a-valid-uri\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(invalidUriJson, typeof(SimpleUriTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(invalidUriJson, typeof(SimpleUriTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleUriTestClass), nameof(SimpleUriTestClass.Value)), typeof(Uri), JTokenType.String), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleUriTestClass), nameof(SimpleUriTestClass.Value)), typeof(Uri), JTokenType.String), resp.First());
+    }
 
-        public class SimpleFloatTestClass
-        {
-            public float Value { get; set; }
-        }
+    public class SimpleFloatTestClass
+    {
+        public float Value { get; set; }
+    }
 
-        private const string FloatJson = "{\"Value\":1.23}";
+    private const string FloatJson = "{\"Value\":1.23}";
 
-        [TestMethod]
-        public void ClassWith_Float_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleFloatTestClass>(FloatJson);
+    [TestMethod]
+    public void ClassWith_Float_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleFloatTestClass>(FloatJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(1.23, deserialized.Value, 0.000001);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(1.23, deserialized.Value, 0.000001);
+    }
 
-        [TestMethod]
-        public void ClassWith_Float_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Float_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(FloatJson, typeof(SimpleFloatTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(FloatJson, typeof(SimpleFloatTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleDoubleTestClass
-        {
-            public double Value { get; set; }
-        }
+    public class SimpleDoubleTestClass
+    {
+        public double Value { get; set; }
+    }
 
-        private const string DoubleJson = "{\"Value\":2.34}";
+    private const string DoubleJson = "{\"Value\":2.34}";
 
-        [TestMethod]
-        public void ClassWith_Double_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleDoubleTestClass>(DoubleJson);
+    [TestMethod]
+    public void ClassWith_Double_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleDoubleTestClass>(DoubleJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(2.34, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(2.34, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Double_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Double_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(DoubleJson, typeof(SimpleDoubleTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(DoubleJson, typeof(SimpleDoubleTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleDecimalTestClass
-        {
-            public decimal Value { get; set; }
-        }
+    public class SimpleDecimalTestClass
+    {
+        public decimal Value { get; set; }
+    }
 
-        private const string DecimalJson = "{\"Value\":3.45}";
+    private const string DecimalJson = "{\"Value\":3.45}";
 
-        [TestMethod]
-        public void ClassWith_Decimal_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleDecimalTestClass>(DecimalJson);
+    [TestMethod]
+    public void ClassWith_Decimal_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleDecimalTestClass>(DecimalJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(3.45M, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(3.45M, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_Decimal_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Decimal_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(DecimalJson, typeof(SimpleDecimalTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(DecimalJson, typeof(SimpleDecimalTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleDateTimeTestClass
-        {
-            public DateTime Value { get; set; }
-        }
+    public class SimpleDateTimeTestClass
+    {
+        public DateTime Value { get; set; }
+    }
 
-        private const string DateTimeJson = "{\"Value\":\"2016-06-24T12:34:56Z\"}";
+    private const string DateTimeJson = "{\"Value\":\"2016-06-24T12:34:56Z\"}";
 
-        [TestMethod]
-        public void ClassWith_DateTime_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleDateTimeTestClass>(DateTimeJson);
+    [TestMethod]
+    public void ClassWith_DateTime_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleDateTimeTestClass>(DateTimeJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(new DateTime(2016, 6, 24, 12, 34, 56), deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(new DateTime(2016, 6, 24, 12, 34, 56), deserialized.Value);
+    }
 
-        [TestMethod]
-        public void ClassWith_DateTime_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_DateTime_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(DateTimeJson, typeof(SimpleDateTimeTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(DateTimeJson, typeof(SimpleDateTimeTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        public class SimpleGuidTestClass
-        {
-            public Guid Value { get; set; }
-        }
+    public class SimpleGuidTestClass
+    {
+        public Guid Value { get; set; }
+    }
 
-        private const string GuidJson = "{\"Value\":\"da42c5cd-5cd6-44f5-a733-f0a235b2f5b5\"}";
+    private const string GuidJson = "{\"Value\":\"da42c5cd-5cd6-44f5-a733-f0a235b2f5b5\"}";
 
-        [TestMethod]
-        public void ClassWith_Guid_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleGuidTestClass>(GuidJson);
+    [TestMethod]
+    public void ClassWith_Guid_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleGuidTestClass>(GuidJson);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("da42c5cd-5cd6-44f5-a733-f0a235b2f5b5", deserialized.Value.ToString());
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("da42c5cd-5cd6-44f5-a733-f0a235b2f5b5", deserialized.Value.ToString());
+    }
 
-        [TestMethod]
-        public void ClassWith_Guid_PropertyCheckedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void ClassWith_Guid_PropertyCheckedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(GuidJson, typeof(SimpleGuidTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(GuidJson, typeof(SimpleGuidTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
     }
 }

@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisStringMatchesRegexAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisStringMatchesRegexAttribute(string pattern)
-        {
-            this.Pattern = pattern;
-        }
+namespace ApiAnalysis;
 
-        public string Pattern { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisStringMatchesRegexAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisStringMatchesRegexAttribute(string pattern)
+    {
+        this.Pattern = pattern;
     }
+
+    public string Pattern { get; }
 }

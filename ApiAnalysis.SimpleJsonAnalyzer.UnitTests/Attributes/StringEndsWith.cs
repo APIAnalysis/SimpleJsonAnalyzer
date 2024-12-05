@@ -8,52 +8,51 @@ using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ApiAnalysis.UnitTests.Attributes
+namespace ApiAnalysis.UnitTests.Attributes;
+
+[TestClass]
+public class StringEndsWith
 {
-    [TestClass]
-    public class StringEndsWith
+    public class SimpleStringClass
     {
-        public class SimpleStringClass
-        {
-            [ApiAnalysisStringEndsWith("ing")]
-            public string Name { get; set; }
-        }
+        [ApiAnalysisStringEndsWith("ing")]
+        public string Name { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected()
-        {
-            var json = "{\"Name\":\"Testing\"}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected()
+    {
+        var json = "{\"Name\":\"Testing\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleStringClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleStringClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("Testing", deserialized.Name);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("Testing", deserialized.Name);
+    }
 
-        [TestMethod]
-        public void Does_Found()
-        {
-            var json = "{\"Name\":\"Testing\"}";
+    [TestMethod]
+    public void Does_Found()
+    {
+        var json = "{\"Name\":\"Testing\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleStringClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleStringClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void DoesNot_Flagged()
-        {
-            var json = "{\"Name\":\"Tester\"}";
+    [TestMethod]
+    public void DoesNot_Flagged()
+    {
+        var json = "{\"Name\":\"Tester\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleStringClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleStringClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.ValueWasSupposedToEndWithMessage("Tester", PropertyInfoHelper.Get(typeof(SimpleStringClass), nameof(SimpleStringClass.Name)), "ing"), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.ValueWasSupposedToEndWithMessage("Tester", PropertyInfoHelper.Get(typeof(SimpleStringClass), nameof(SimpleStringClass.Name)), "ing"), resp.First());
     }
 }

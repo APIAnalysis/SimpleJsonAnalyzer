@@ -8,36 +8,35 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class UnexpectedResponse
 {
-    [TestClass]
-    public class UnexpectedResponse
+    public class SimpleTestClass
     {
-        public class SimpleTestClass
-        {
-            public int Value { get; set; }
-        }
+        public int Value { get; set; }
+    }
 
-        private const string Json = "{\"Value\":45,\"OtherValue\":99}";
+    private const string Json = "{\"Value\":45,\"OtherValue\":99}";
 
-        [TestMethod]
-        public void JsonWithExtraProperty_DeserializesOk()
-        {
-            var deserialized = JsonConvert.DeserializeObject<SimpleTestClass>(Json);
+    [TestMethod]
+    public void JsonWithExtraProperty_DeserializesOk()
+    {
+        var deserialized = JsonConvert.DeserializeObject<SimpleTestClass>(Json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(45, deserialized.Value);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(45, deserialized.Value);
+    }
 
-        [TestMethod]
-        public void JsonWithExtraProperty_DetectedOk()
-        {
-            var analyzer = new SimpleJsonAnalyzer();
+    [TestMethod]
+    public void JsonWithExtraProperty_DetectedOk()
+    {
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(Json, typeof(SimpleTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(Json, typeof(SimpleTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.JsonIncludesUnexpectedPropertyMessage(new JProperty("OtherValue", 99), typeof(SimpleTestClass)), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.JsonIncludesUnexpectedPropertyMessage(new JProperty("OtherValue", 99), typeof(SimpleTestClass)), resp.First());
     }
 }

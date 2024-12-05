@@ -3,43 +3,42 @@
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
 
-namespace RapidXamlToolkit.Options
+namespace RapidXamlToolkit.Options;
+
+public class ProfileSummary : CanNotifyPropertyChanged
 {
-    public class ProfileSummary : CanNotifyPropertyChanged
+    private bool isActive;
+
+    public int Index { get; set; }
+
+    public string Name { get; set; }
+
+    public bool IsActive
     {
-        private bool isActive;
-
-        public int Index { get; set; }
-
-        public string Name { get; set; }
-
-        public bool IsActive
+        get
         {
-            get
-            {
-                return this.isActive;
-            }
-
-            set
-            {
-                this.isActive = value;
-                this.OnPropertyChanged();
-                this.OnPropertyChanged(nameof(this.DisplayName));
-            }
+            return this.isActive;
         }
 
-        public string DisplayName
+        set
         {
-            get
+            this.isActive = value;
+            this.OnPropertyChanged();
+            this.OnPropertyChanged(nameof(this.DisplayName));
+        }
+    }
+
+    public string DisplayName
+    {
+        get
+        {
+            if (this.IsActive)
             {
-                if (this.IsActive)
-                {
-                    return this.Name;
-                }
-                else
-                {
-                    return this.Name;
-                }
+                return this.Name;
+            }
+            else
+            {
+                return this.Name;
             }
         }
     }

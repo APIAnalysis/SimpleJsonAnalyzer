@@ -5,10 +5,9 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+public abstract class BaseApiAnalysisAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public abstract class BaseApiAnalysisAttribute : Attribute
-    {
-    }
 }

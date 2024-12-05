@@ -8,99 +8,98 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace RapidXamlToolkit.Options
+namespace RapidXamlToolkit.Options;
+
+public class Profile : CanNotifyPropertyChanged, ICloneable
 {
-    public class Profile : CanNotifyPropertyChanged, ICloneable
+    private Mapping selectedMapping;
+
+    private ObservableCollection<Mapping> mappings;
+
+    public string Name { get; set; }
+
+    public string ClassGrouping { get; set; }
+
+    [AllowedPlaceholders(Placeholder.PropertyName, Placeholder.PropertyNameWithSpaces, Placeholder.PropertyType, Placeholder.IncrementingInteger, Placeholder.RepeatingInteger)]
+    public string FallbackOutput { get; set; }
+
+    [AllowedPlaceholders(Placeholder.PropertyName, Placeholder.PropertyNameWithSpaces, Placeholder.PropertyType, Placeholder.IncrementingInteger, Placeholder.RepeatingInteger)]
+    public string SubPropertyOutput { get; set; }
+
+    [AllowedPlaceholders(Placeholder.EnumElement, Placeholder.EnumElementWithSpaces, Placeholder.EnumPropName)]
+    public string EnumMemberOutput { get; set; }
+
+    public ObservableCollection<Mapping> Mappings
     {
-        private Mapping selectedMapping;
-
-        private ObservableCollection<Mapping> mappings;
-
-        public string Name { get; set; }
-
-        public string ClassGrouping { get; set; }
-
-        [AllowedPlaceholders(Placeholder.PropertyName, Placeholder.PropertyNameWithSpaces, Placeholder.PropertyType, Placeholder.IncrementingInteger, Placeholder.RepeatingInteger)]
-        public string FallbackOutput { get; set; }
-
-        [AllowedPlaceholders(Placeholder.PropertyName, Placeholder.PropertyNameWithSpaces, Placeholder.PropertyType, Placeholder.IncrementingInteger, Placeholder.RepeatingInteger)]
-        public string SubPropertyOutput { get; set; }
-
-        [AllowedPlaceholders(Placeholder.EnumElement, Placeholder.EnumElementWithSpaces, Placeholder.EnumPropName)]
-        public string EnumMemberOutput { get; set; }
-
-        public ObservableCollection<Mapping> Mappings
+        get
         {
-            get
-            {
-                return this.mappings;
-            }
-
-            set
-            {
-                this.mappings = value;
-                this.OnPropertyChanged();
-            }
+            return this.mappings;
         }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
-        public Mapping SelectedMapping
+        set
         {
-            get
-            {
-                return this.selectedMapping;
-            }
+            this.mappings = value;
+            this.OnPropertyChanged();
+        }
+    }
 
-            set
-            {
-                this.selectedMapping = value;
-                this.OnPropertyChanged();
-            }
+    [JsonIgnore]
+    [IgnoreDataMember]
+    public Mapping SelectedMapping
+    {
+        get
+        {
+            return this.selectedMapping;
         }
 
-        public ViewGenerationSettings ViewGeneration { get; set; }
+        set
+        {
+            this.selectedMapping = value;
+            this.OnPropertyChanged();
+        }
+    }
 
-        public DatacontextSettings Datacontext { get; set; }
+    public ViewGenerationSettings ViewGeneration { get; set; }
 
-        ////public static Profile CreateNew()
+    public DatacontextSettings Datacontext { get; set; }
+
+    ////public static Profile CreateNew()
+    ////{
+    ////    return new Profile
+    ////    {
+    ////        Name = StringRes.UI_NewProfileDefaultName,
+    ////        ClassGrouping = string.Empty,
+    ////        FallbackOutput = string.Empty,
+    ////        SubPropertyOutput = string.Empty,
+    ////        Mappings = new ObservableCollection<Mapping>(),
+    ////        ViewGeneration = new ViewGenerationSettings(),
+    ////        Datacontext = new DatacontextSettings(),
+    ////    };
+    ////}
+
+    public object Clone()
+    {
+        ////var result = new Profile
         ////{
-        ////    return new Profile
-        ////    {
-        ////        Name = StringRes.UI_NewProfileDefaultName,
-        ////        ClassGrouping = string.Empty,
-        ////        FallbackOutput = string.Empty,
-        ////        SubPropertyOutput = string.Empty,
-        ////        Mappings = new ObservableCollection<Mapping>(),
-        ////        ViewGeneration = new ViewGenerationSettings(),
-        ////        Datacontext = new DatacontextSettings(),
-        ////    };
+        ////    Name = StringRes.UI_CopiedProfileName.WithParams(this.Name),
+        ////    ClassGrouping = this.ClassGrouping,
+        ////    FallbackOutput = this.FallbackOutput,
+        ////    SubPropertyOutput = this.SubPropertyOutput,
+        ////    Mappings = new ObservableCollection<Mapping>(),
+        ////    ViewGeneration = this.ViewGeneration,
+        ////    Datacontext = this.Datacontext,
+        ////};
+
+        ////foreach (var mapping in this.Mappings)
+        ////{
+        ////    result.Mappings.Add((Mapping)mapping.Clone());
         ////}
 
-        public object Clone()
-        {
-            ////var result = new Profile
-            ////{
-            ////    Name = StringRes.UI_CopiedProfileName.WithParams(this.Name),
-            ////    ClassGrouping = this.ClassGrouping,
-            ////    FallbackOutput = this.FallbackOutput,
-            ////    SubPropertyOutput = this.SubPropertyOutput,
-            ////    Mappings = new ObservableCollection<Mapping>(),
-            ////    ViewGeneration = this.ViewGeneration,
-            ////    Datacontext = this.Datacontext,
-            ////};
+        return null;
+    }
 
-            ////foreach (var mapping in this.Mappings)
-            ////{
-            ////    result.Mappings.Add((Mapping)mapping.Clone());
-            ////}
-
-            return null;
-        }
-
-        public void RefreshMappings()
-        {
-            this.OnPropertyChanged(nameof(this.Mappings));
-        }
+    public void RefreshMappings()
+    {
+        this.OnPropertyChanged(nameof(this.Mappings));
     }
 }

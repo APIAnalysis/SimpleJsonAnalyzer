@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisStringMinimumLengthAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisStringMinimumLengthAttribute(int minLength)
-        {
-            this.MinimumAcceptableLength = minLength;
-        }
+namespace ApiAnalysis;
 
-        public int MinimumAcceptableLength { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisStringMinimumLengthAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisStringMinimumLengthAttribute(int minLength)
+    {
+        this.MinimumAcceptableLength = minLength;
     }
+
+    public int MinimumAcceptableLength { get; }
 }

@@ -8,72 +8,71 @@ using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ApiAnalysis.UnitTests.Attributes
+namespace ApiAnalysis.UnitTests.Attributes;
+
+[TestClass]
+public class Optional
 {
-    [TestClass]
-    public class Optional
+    public class OptionalTestClass
     {
-        public class OptionalTestClass
-        {
-            public string Name { get; set; }
+        public string Name { get; set; }
 
-            [ApiAnalysisOptional]
-            public string Code { get; set; }
+        [ApiAnalysisOptional]
+        public string Code { get; set; }
 
-            [JsonIgnore]
-            public string Value { get; set; }
-        }
+        [JsonIgnore]
+        public string Value { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected()
-        {
-            var json = "{\"Name\":\"1a2\"}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected()
+    {
+        var json = "{\"Name\":\"1a2\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<OptionalTestClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<OptionalTestClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("1a2", deserialized.Name);
-            Assert.IsNull(deserialized.Code);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("1a2", deserialized.Name);
+        Assert.IsNull(deserialized.Code);
+    }
 
-        // TODO: Need to revisit for #6
-        ////[TestMethod]
-        ////public void MarkedOptional_AndNotIncluded_HandledOk()
-        ////{
-        ////    var json = "{\"Name\":\"1a2\",\"Value\":\"1a2\"}";
+    // TODO: Need to revisit for #6
+    ////[TestMethod]
+    ////public void MarkedOptional_AndNotIncluded_HandledOk()
+    ////{
+    ////    var json = "{\"Name\":\"1a2\",\"Value\":\"1a2\"}";
 
-        ////    var analyzer = new SimpleJsonAnalyzer();
+    ////    var analyzer = new SimpleJsonAnalyzer();
 
-        ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
+    ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
 
-        ////    Assert.AreEqual(1, resp.Count);
-        ////    Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        ////}
+    ////    Assert.AreEqual(1, resp.Count);
+    ////    Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    ////}
 
-        ////[TestMethod]
-        ////public void NotMarkedOptionalOrJsonIgnore_AndNotIncluded_Reported()
-        ////{
-        ////    var json = "{\"Value\":\"1a2\",\"Code\":\"1a2\"}";
+    ////[TestMethod]
+    ////public void NotMarkedOptionalOrJsonIgnore_AndNotIncluded_Reported()
+    ////{
+    ////    var json = "{\"Value\":\"1a2\",\"Code\":\"1a2\"}";
 
-        ////    var analyzer = new SimpleJsonAnalyzer();
+    ////    var analyzer = new SimpleJsonAnalyzer();
 
-        ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
+    ////    var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
 
-        ////    Assert.AreEqual(1, resp.Count);
-        ////    Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(OptionalTestClass), nameof(OptionalTestClass.Name))), resp.First());
-        ////}
+    ////    Assert.AreEqual(1, resp.Count);
+    ////    Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(OptionalTestClass), nameof(OptionalTestClass.Name))), resp.First());
+    ////}
 
-        [TestMethod]
-        public void MarkedJsonIgnore_AndNotIncluded_HandledOk()
-        {
-            var json = "{\"Name\":\"1a2\",\"Code\":\"1a2\"}";
+    [TestMethod]
+    public void MarkedJsonIgnore_AndNotIncluded_HandledOk()
+    {
+        var json = "{\"Name\":\"1a2\",\"Code\":\"1a2\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(OptionalTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
     }
 }

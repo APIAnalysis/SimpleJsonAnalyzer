@@ -9,135 +9,134 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class Bools
 {
-    [TestClass]
-    public class Bools
+    public class SimpleBoolClass
     {
-        public class SimpleBoolClass
-        {
-            public bool Enabled { get; set; }
-        }
+        public bool Enabled { get; set; }
+    }
 
-        public class BigBoolClass
-        {
-            public bool LowerCaseString { get; set; }
+    public class BigBoolClass
+    {
+        public bool LowerCaseString { get; set; }
 
-            public bool Number { get; set; }
-        }
+        public bool Number { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected()
-        {
-            var json = "{\"Enabled\":true}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected()
+    {
+        var json = "{\"Enabled\":true}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleBoolClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleBoolClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(true, deserialized.Enabled);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(true, deserialized.Enabled);
+    }
 
-        [TestMethod]
-        public void AllVariationsInJsonDeserializesAsExpected()
-        {
-            var json = "{\"LowerCaseString\":\"true\",\"Number\":1}";
+    [TestMethod]
+    public void AllVariationsInJsonDeserializesAsExpected()
+    {
+        var json = "{\"LowerCaseString\":\"true\",\"Number\":1}";
 
-            var deserialized = JsonConvert.DeserializeObject<BigBoolClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<BigBoolClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(true, deserialized.LowerCaseString);
-            Assert.AreEqual(true, deserialized.Number);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(true, deserialized.LowerCaseString);
+        Assert.AreEqual(true, deserialized.Number);
+    }
 
-        [TestMethod]
-        public void True_DetectedOk()
-        {
-            var json = "{\"Enabled\":true}";
+    [TestMethod]
+    public void True_DetectedOk()
+    {
+        var json = "{\"Enabled\":true}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void False_DetectedOk()
-        {
-            var json = "{\"Enabled\":false}";
+    [TestMethod]
+    public void False_DetectedOk()
+    {
+        var json = "{\"Enabled\":false}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void True_AsLowercaseString_DetectedOk()
-        {
-            var json = "{\"Enabled\":\"true\"}";
+    [TestMethod]
+    public void True_AsLowercaseString_DetectedOk()
+    {
+        var json = "{\"Enabled\":\"true\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void False_AsLowercaseString_DetectedOk()
-        {
-            var json = "{\"Enabled\":\"false\"}";
+    [TestMethod]
+    public void False_AsLowercaseString_DetectedOk()
+    {
+        var json = "{\"Enabled\":\"false\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void True_AsNumber_DetectedOk()
-        {
-            var json = "{\"Enabled\":1}";
+    [TestMethod]
+    public void True_AsNumber_DetectedOk()
+    {
+        var json = "{\"Enabled\":1}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void False_AsNumber_DetectedOk()
-        {
-            var json = "{\"Enabled\":0}";
+    [TestMethod]
+    public void False_AsNumber_DetectedOk()
+    {
+        var json = "{\"Enabled\":0}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void String_Error_DetectedOk()
-        {
-            var json = "{\"Enabled\":\"NOT-A-BOOL\"}";
+    [TestMethod]
+    public void String_Error_DetectedOk()
+    {
+        var json = "{\"Enabled\":\"NOT-A-BOOL\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleBoolClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleBoolClass), nameof(SimpleBoolClass.Enabled)), typeof(bool), JTokenType.String), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleBoolClass), nameof(SimpleBoolClass.Enabled)), typeof(bool), JTokenType.String), resp.First());
     }
 }

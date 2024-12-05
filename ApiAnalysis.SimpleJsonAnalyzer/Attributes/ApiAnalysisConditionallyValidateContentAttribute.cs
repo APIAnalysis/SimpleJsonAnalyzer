@@ -5,24 +5,23 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+// Note. This is not supported in SimpleJsonAnalyzer
+// The conditional check is based on another property of the object matching that defined
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+public sealed class ApiAnalysisConditionallyValidateContentAttribute : BaseApiAnalysisAttribute
 {
-    // Note. This is not supported in SimpleJsonAnalyzer
-    // The conditional check is based on another property of the object matching that defined
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public sealed class ApiAnalysisConditionallyValidateContentAttribute : BaseApiAnalysisAttribute
+    public ApiAnalysisConditionallyValidateContentAttribute(Type jsonType, string property, string value)
     {
-        public ApiAnalysisConditionallyValidateContentAttribute(Type jsonType, string property, string value)
-        {
-            this.JsonType = jsonType;
-            this.Property = property;
-            this.Value = value;
-        }
-
-        public Type JsonType { get; }
-
-        public string Property { get; }
-
-        public string Value { get; }
+        this.JsonType = jsonType;
+        this.Property = property;
+        this.Value = value;
     }
+
+    public Type JsonType { get; }
+
+    public string Property { get; }
+
+    public string Value { get; }
 }

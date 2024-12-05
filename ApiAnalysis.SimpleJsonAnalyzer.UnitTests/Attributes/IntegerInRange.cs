@@ -7,80 +7,79 @@ using System.Linq;
 using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApiAnalysis.UnitTests.Attributes
+namespace ApiAnalysis.UnitTests.Attributes;
+
+[TestClass]
+public class IntegerInRange
 {
-    [TestClass]
-    public class IntegerInRange
+    public class IntegerRangeCheckClass
     {
-        public class IntegerRangeCheckClass
-        {
-            [ApiAnalysisIntegerInRange(5, 10)]
-            public int Number { get; set; }
-        }
+        [ApiAnalysisIntegerInRange(5, 10)]
+        public int Number { get; set; }
+    }
 
-        [TestMethod]
-        public void WithinRange_HandledOk()
-        {
-            var json = "{\"Number\":7}";
+    [TestMethod]
+    public void WithinRange_HandledOk()
+    {
+        var json = "{\"Number\":7}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void AtLowerBoundary_HandledOk()
-        {
-            var json = "{\"Number\":5}";
+    [TestMethod]
+    public void AtLowerBoundary_HandledOk()
+    {
+        var json = "{\"Number\":5}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void AtUpperBoundary_HandledOk()
-        {
-            var json = "{\"Number\":10}";
+    [TestMethod]
+    public void AtUpperBoundary_HandledOk()
+    {
+        var json = "{\"Number\":10}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void BelowLowerBoundary_ReportedOk()
-        {
-            var json = "{\"Number\":4}";
+    [TestMethod]
+    public void BelowLowerBoundary_ReportedOk()
+    {
+        var json = "{\"Number\":4}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.ValueWasLowerThanBoundaryMessage("4", PropertyInfoHelper.Get(typeof(IntegerRangeCheckClass), nameof(IntegerRangeCheckClass.Number)), 5), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.ValueWasLowerThanBoundaryMessage("4", PropertyInfoHelper.Get(typeof(IntegerRangeCheckClass), nameof(IntegerRangeCheckClass.Number)), 5), resp.First());
+    }
 
-        [TestMethod]
-        public void AboveUpperBoundary_ReportedOk()
-        {
-            var json = "{\"Number\":11}";
+    [TestMethod]
+    public void AboveUpperBoundary_ReportedOk()
+    {
+        var json = "{\"Number\":11}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IntegerRangeCheckClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.ValueWasHigherThanBoundaryMessage("11", PropertyInfoHelper.Get(typeof(IntegerRangeCheckClass), nameof(IntegerRangeCheckClass.Number)), 10), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.ValueWasHigherThanBoundaryMessage("11", PropertyInfoHelper.Get(typeof(IntegerRangeCheckClass), nameof(IntegerRangeCheckClass.Number)), 10), resp.First());
     }
 }

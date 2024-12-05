@@ -9,179 +9,178 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class Enums
 {
-    [TestClass]
-    public class Enums
+    public enum ValidColors
     {
-        public enum ValidColors
-        {
-            Red,
-            Green,
-            Blue,
-        }
+        Red,
+        Green,
+        Blue,
+    }
 
-        public class SimpleClass
-        {
-            [JsonConverter(typeof(StringEnumConverter))]
-            public ValidColors Color { get; set; }
-        }
+    public class SimpleClass
+    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValidColors Color { get; set; }
+    }
 
-        public class SimpleClassNoAttribute
-        {
-            public ValidColors Color { get; set; }
-        }
+    public class SimpleClassNoAttribute
+    {
+        public ValidColors Color { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializes_String_AsExpected()
-        {
-            var json = "{\"Color\":\"Blue\"}";
+    [TestMethod]
+    public void ValidJsonDeserializes_String_AsExpected()
+    {
+        var json = "{\"Color\":\"Blue\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(ValidColors.Blue, deserialized.Color);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(ValidColors.Blue, deserialized.Color);
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializes_Int_AsExpected()
-        {
-            var json = "{\"Color\":2}";
+    [TestMethod]
+    public void ValidJsonDeserializes_Int_AsExpected()
+    {
+        var json = "{\"Color\":2}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(ValidColors.Blue, deserialized.Color);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(ValidColors.Blue, deserialized.Color);
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializes_StringWithoutAttribute_AsExpected()
-        {
-            var json = "{\"Color\":\"Blue\"}";
+    [TestMethod]
+    public void ValidJsonDeserializes_StringWithoutAttribute_AsExpected()
+    {
+        var json = "{\"Color\":\"Blue\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleClassNoAttribute>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleClassNoAttribute>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(ValidColors.Blue, deserialized.Color);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(ValidColors.Blue, deserialized.Color);
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializes_IntWithoutAttribute_AsExpected()
-        {
-            var json = "{\"Color\":2}";
+    [TestMethod]
+    public void ValidJsonDeserializes_IntWithoutAttribute_AsExpected()
+    {
+        var json = "{\"Color\":2}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleClassNoAttribute>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleClassNoAttribute>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(ValidColors.Blue, deserialized.Color);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(ValidColors.Blue, deserialized.Color);
+    }
 
-        [TestMethod]
-        public void ExpectedValueWithAttribute_AcceptedOk()
-        {
-            var json = "{\"Color\":\"Blue\"}";
+    [TestMethod]
+    public void ExpectedValueWithAttribute_AcceptedOk()
+    {
+        var json = "{\"Color\":\"Blue\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void ExpectedValueWithoutAttribue_AcceptedOk()
-        {
-            var json = "{\"Color\":\"Blue\"}";
+    [TestMethod]
+    public void ExpectedValueWithoutAttribue_AcceptedOk()
+    {
+        var json = "{\"Color\":\"Blue\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void ValidInt_WithAttribute_AcceptedOk()
-        {
-            var json = "{\"Color\":2}";
+    [TestMethod]
+    public void ValidInt_WithAttribute_AcceptedOk()
+    {
+        var json = "{\"Color\":2}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void ValidInt_WithoutAttribue_AcceptedOk()
-        {
-            var json = "{\"Color\":2}";
+    [TestMethod]
+    public void ValidInt_WithoutAttribue_AcceptedOk()
+    {
+        var json = "{\"Color\":2}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void UnexpectedStringValue_DetectedOk()
-        {
-            var json = "{\"Color\":\"Yellow\"}";
+    [TestMethod]
+    public void UnexpectedStringValue_DetectedOk()
+    {
+        var json = "{\"Color\":\"Yellow\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedValueForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "Yellow"), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedValueForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "Yellow"), resp.First());
+    }
 
-        [TestMethod]
-        public void UnexpectedStringValueWithoutAttribute_DetectedOk()
-        {
-            var json = "{\"Color\":\"Yellow\"}";
+    [TestMethod]
+    public void UnexpectedStringValueWithoutAttribute_DetectedOk()
+    {
+        var json = "{\"Color\":\"Yellow\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedStringForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "Yellow"), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedStringForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "Yellow"), resp.First());
+    }
 
-        [TestMethod]
-        public void UnexpectedIntValue_DetectedOk()
-        {
-            var json = "{\"Color\":3}";
+    [TestMethod]
+    public void UnexpectedIntValue_DetectedOk()
+    {
+        var json = "{\"Color\":3}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
 
-            // Note: StringEnumConverter will allow values of the underlying type that do not map to a specified/named value (autoconverting doesn't)
-            // Technically this test is valid but may expect the following response. If that's the case could remove use of StringEnumConverter
-            // Assert.AreEqual(MessageBuilder.UnexpectedValueForEnum(nameof(SimpleClass.Color), nameof(ValidColors), "3"), resp.First());
-        }
+        // Note: StringEnumConverter will allow values of the underlying type that do not map to a specified/named value (autoconverting doesn't)
+        // Technically this test is valid but may expect the following response. If that's the case could remove use of StringEnumConverter
+        // Assert.AreEqual(MessageBuilder.UnexpectedValueForEnum(nameof(SimpleClass.Color), nameof(ValidColors), "3"), resp.First());
+    }
 
-        [TestMethod]
-        public void UnexpectedIntValueWithoutAttribute_DetectedOk()
-        {
-            var json = "{\"Color\":3}";
+    [TestMethod]
+    public void UnexpectedIntValueWithoutAttribute_DetectedOk()
+    {
+        var json = "{\"Color\":3}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClassNoAttribute)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedValueForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "3"), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedValueForEnumMessage(PropertyInfoHelper.Get(typeof(SimpleClass), nameof(SimpleClass.Color)), "3"), resp.First());
     }
 }

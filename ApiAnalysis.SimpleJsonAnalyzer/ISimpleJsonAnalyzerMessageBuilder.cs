@@ -7,64 +7,63 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json.Linq;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+public interface ISimpleJsonAnalyzerMessageBuilder
 {
-    public interface ISimpleJsonAnalyzerMessageBuilder
-    {
-        string AllGoodMessage { get; }
+    string AllGoodMessage { get; }
 
-        string JsonConverterCannotConvertMessage { get; }
+    string JsonConverterCannotConvertMessage { get; }
 
-        string JsonStringIsEmptyMessage { get; }
+    string JsonStringIsEmptyMessage { get; }
 
-        string MissingValidJsonMessage { get; }
+    string MissingValidJsonMessage { get; }
 
-        string InsufficientStringLengthMessage(PropertyInfo property, string receivedValue, int minLength);
+    string InsufficientStringLengthMessage(PropertyInfo property, string receivedValue, int minLength);
 
-        string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart);
+    string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart);
 
-        string UnexpectedPropertyMessage(PropertyInfo property, string reason);
+    string UnexpectedPropertyMessage(PropertyInfo property, string reason);
 
-        string InvalidPropertyValueMessage(string unexpectedValue, PropertyInfo property);
+    string InvalidPropertyValueMessage(string unexpectedValue, PropertyInfo property);
 
-        string MissingPropertyValueMessage(PropertyInfo property);
+    string MissingPropertyValueMessage(PropertyInfo property);
 
-        string ValueWasSupposedToContainMessage(string value, PropertyInfo property, string shouldContain);
+    string ValueWasSupposedToContainMessage(string value, PropertyInfo property, string shouldContain);
 
-        string ValueWasSupposedToEndWithMessage(string value, PropertyInfo property, string expectedEnding);
+    string ValueWasSupposedToEndWithMessage(string value, PropertyInfo property, string expectedEnding);
 
-        string ValueWasSupposedToMatchPatternMessage(string value, PropertyInfo property, string patternToMatch);
+    string ValueWasSupposedToMatchPatternMessage(string value, PropertyInfo property, string patternToMatch);
 
-        string ValueWasLowerThanBoundaryMessage(string value, PropertyInfo property, int boundary);
+    string ValueWasLowerThanBoundaryMessage(string value, PropertyInfo property, int boundary);
 
-        string ValueWasHigherThanBoundaryMessage(string value, PropertyInfo property, int boundary);
+    string ValueWasHigherThanBoundaryMessage(string value, PropertyInfo property, int boundary);
 
-        string ValueIsCloseToMaxMessage(string value, PropertyInfo property, Type type);
+    string ValueIsCloseToMaxMessage(string value, PropertyInfo property, Type type);
 
-        string JsonIncludesUnexpectedPropertyMessage(JProperty property, Type type);
+    string JsonIncludesUnexpectedPropertyMessage(JProperty property, Type type);
 
-        string UnexpectedTypeMessage(PropertyInfo property, Type expectedType, JTokenType actualType);
+    string UnexpectedTypeMessage(PropertyInfo property, Type expectedType, JTokenType actualType);
 
-        string ArrayOfUnexpectedTypeMessage(Type expectedType, JTokenType receivedType);
+    string ArrayOfUnexpectedTypeMessage(Type expectedType, JTokenType receivedType);
 
-        string UnexpectedEmptyCollectionMessage(PropertyInfo property);
+    string UnexpectedEmptyCollectionMessage(PropertyInfo property);
 
-        string UnexpectedNullMessage(PropertyInfo property);
+    string UnexpectedNullMessage(PropertyInfo property);
 
-        string UnexpectedStringForEnumMessage(PropertyInfo property, string jsonValue);
+    string UnexpectedStringForEnumMessage(PropertyInfo property, string jsonValue);
 
-        string UnexpectedValueForEnumMessage(PropertyInfo property, string jsonValue);
+    string UnexpectedValueForEnumMessage(PropertyInfo property, string jsonValue);
 
-        // this can take an array of strings not PropertyInfo as they're always the names of properties of the type
-        string MultipleMutuallyExclusivePropertiesMessage(Type type, params string[] properties);
+    // this can take an array of strings not PropertyInfo as they're always the names of properties of the type
+    string MultipleMutuallyExclusivePropertiesMessage(Type type, params string[] properties);
 
-        // this can take an array of strings not PropertyInfo as they're always the names of properties of the type
-        string NoRequiredMutuallyExclusivePropertiesMessage(Type type, params string[] properties);
+    // this can take an array of strings not PropertyInfo as they're always the names of properties of the type
+    string NoRequiredMutuallyExclusivePropertiesMessage(Type type, params string[] properties);
 
-        string JsonAnalysisExceptionMessage(Exception exc);
+    string JsonAnalysisExceptionMessage(Exception exc);
 
-        string UnknownKeyMessage(PropertyInfo property, string key);
+    string UnknownKeyMessage(PropertyInfo property, string key);
 
-        string MissingMandatoryKeyMessage(PropertyInfo property, string key);
-    }
+    string MissingMandatoryKeyMessage(PropertyInfo property, string key);
 }

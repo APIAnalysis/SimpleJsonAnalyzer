@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisStringStartsWithAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisStringStartsWithAttribute(string expectedStart)
-        {
-            this.ExpectedStart = expectedStart;
-        }
+namespace ApiAnalysis;
 
-        public string ExpectedStart { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisStringStartsWithAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisStringStartsWithAttribute(string expectedStart)
+    {
+        this.ExpectedStart = expectedStart;
     }
+
+    public string ExpectedStart { get; }
 }

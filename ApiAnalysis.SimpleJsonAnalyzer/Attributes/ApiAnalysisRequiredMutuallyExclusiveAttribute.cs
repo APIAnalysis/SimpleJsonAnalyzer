@@ -5,10 +5,9 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+public sealed class ApiAnalysisRequiredMutuallyExclusiveAttribute : BaseApiAnalysisAttribute
 {
-    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public sealed class ApiAnalysisRequiredMutuallyExclusiveAttribute : BaseApiAnalysisAttribute
-    {
-    }
 }

@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisStringContainsAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisStringContainsAttribute(string expected)
-        {
-            this.Expected = expected;
-        }
+namespace ApiAnalysis;
 
-        public string Expected { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisStringContainsAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisStringContainsAttribute(string expected)
+    {
+        this.Expected = expected;
     }
+
+    public string Expected { get; }
 }

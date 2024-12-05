@@ -5,10 +5,9 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisOptionalAttribute : BaseApiAnalysisAttribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisOptionalAttribute : BaseApiAnalysisAttribute
-    {
-    }
 }

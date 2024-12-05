@@ -3,13 +3,12 @@
 // Licensed under the MIT License. See LICENSE in the solution root for license information.
 // </copyright>
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+/// <summary>
+/// Helper class for accessing SimpleJsonAnalyzerMessageBuilder in tests
+/// </summary>
+public static class MessageBuilder
 {
-    /// <summary>
-    /// Helper class for accessing SimpleJsonAnalyzerMessageBuilder in tests
-    /// </summary>
-    public static class MessageBuilder
-    {
-        public static SimpleJsonAnalyzerMessageBuilder Get => new SimpleJsonAnalyzerMessageBuilder();
-    }
+    public static SimpleJsonAnalyzerMessageBuilder Get => new SimpleJsonAnalyzerMessageBuilder();
 }

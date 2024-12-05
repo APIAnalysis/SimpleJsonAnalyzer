@@ -7,32 +7,31 @@ using System.Linq;
 using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class MissingProperties
 {
-    [TestClass]
-    public class MissingProperties
+    public class MissingPropertiesClass
     {
-        public class MissingPropertiesClass
-        {
-            public string Name { get; set; }
+        public string Name { get; set; }
 
-            public int Id { get; set; }
+        public int Id { get; set; }
 
-            public string Label { get; set; }
-        }
+        public string Label { get; set; }
+    }
 
-        [TestMethod]
-        public void MissingProperties_DetectedOk()
-        {
-            var json = "{\"Label\":\"Test value\"}";
+    [TestMethod]
+    public void MissingProperties_DetectedOk()
+    {
+        var json = "{\"Label\":\"Test value\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(MissingPropertiesClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(MissingPropertiesClass)).Result;
 
-            Assert.AreEqual(2, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(MissingPropertiesClass), nameof(MissingPropertiesClass.Name))), resp.First());
-            Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(MissingPropertiesClass), nameof(MissingPropertiesClass.Id))), resp.Last());
-        }
+        Assert.AreEqual(2, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(MissingPropertiesClass), nameof(MissingPropertiesClass.Name))), resp.First());
+        Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(MissingPropertiesClass), nameof(MissingPropertiesClass.Id))), resp.Last());
     }
 }

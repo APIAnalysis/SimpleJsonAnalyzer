@@ -7,89 +7,88 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class WorksWithAlternatePropertyNames
 {
-    [TestClass]
-    public class WorksWithAlternatePropertyNames
+    public class JsonPropertyNameNamedParameterTestClass
     {
-        public class JsonPropertyNameNamedParameterTestClass
-        {
-            [JsonProperty(PropertyName = "FakeName")]
-            public string RealName { get; set; }
-        }
+        [JsonProperty(PropertyName = "FakeName")]
+        public string RealName { get; set; }
+    }
 
-        public class JsonPropertyNameDefaultConstructorTestClass
-        {
-            [JsonProperty("FakeName")]
-            public string RealName { get; set; }
-        }
+    public class JsonPropertyNameDefaultConstructorTestClass
+    {
+        [JsonProperty("FakeName")]
+        public string RealName { get; set; }
+    }
 
-        [System.Runtime.Serialization.DataContract]
-        public class DataMemberNameTestClass
-        {
-            [System.Runtime.Serialization.DataMember(Name = "FakeName")]
-            public string RealName { get; set; }
-        }
+    [System.Runtime.Serialization.DataContract]
+    public class DataMemberNameTestClass
+    {
+        [System.Runtime.Serialization.DataMember(Name = "FakeName")]
+        public string RealName { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonPropertyDeserializesAsExpected()
-        {
-            var json = "{\"FakeName\":\"Joe Bloggs\"}";
+    [TestMethod]
+    public void ValidJsonPropertyDeserializesAsExpected()
+    {
+        var json = "{\"FakeName\":\"Joe Bloggs\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<JsonPropertyNameNamedParameterTestClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<JsonPropertyNameNamedParameterTestClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("Joe Bloggs", deserialized.RealName);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("Joe Bloggs", deserialized.RealName);
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected_WithDataMemeber()
-        {
-            var json = "{\"FakeName\":\"Joe Bloggs\"}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected_WithDataMemeber()
+    {
+        var json = "{\"FakeName\":\"Joe Bloggs\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<DataMemberNameTestClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<DataMemberNameTestClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual("Joe Bloggs", deserialized.RealName);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual("Joe Bloggs", deserialized.RealName);
+    }
 
-        [TestMethod]
-        public void JsonPropertyName_NamedParameter_HandledOk()
-        {
-            var json = "{\"FakeName\":\"Joe Bloggs\"}";
+    [TestMethod]
+    public void JsonPropertyName_NamedParameter_HandledOk()
+    {
+        var json = "{\"FakeName\":\"Joe Bloggs\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(JsonPropertyNameNamedParameterTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(JsonPropertyNameNamedParameterTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void JsonPropertyName_DefaultConstructor_HandledOk()
-        {
-            var json = "{\"FakeName\":\"Joe Bloggs\"}";
+    [TestMethod]
+    public void JsonPropertyName_DefaultConstructor_HandledOk()
+    {
+        var json = "{\"FakeName\":\"Joe Bloggs\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(JsonPropertyNameDefaultConstructorTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(JsonPropertyNameDefaultConstructorTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void DataMemberName_HandledOk()
-        {
-            var json = "{\"FakeName\":\"Joe Bloggs\"}";
+    [TestMethod]
+    public void DataMemberName_HandledOk()
+    {
+        var json = "{\"FakeName\":\"Joe Bloggs\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(DataMemberNameTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(DataMemberNameTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
     }
 }

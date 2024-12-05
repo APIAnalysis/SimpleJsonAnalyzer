@@ -6,16 +6,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisMandatoryKeysAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisMandatoryKeysAttribute(params string[] mandatoryKeys)
-        {
-            this.MandatoryKeys = new List<string>(mandatoryKeys);
-        }
+namespace ApiAnalysis;
 
-        public List<string> MandatoryKeys { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisMandatoryKeysAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisMandatoryKeysAttribute(params string[] mandatoryKeys)
+    {
+        this.MandatoryKeys = new List<string>(mandatoryKeys);
     }
+
+    public List<string> MandatoryKeys { get; }
 }

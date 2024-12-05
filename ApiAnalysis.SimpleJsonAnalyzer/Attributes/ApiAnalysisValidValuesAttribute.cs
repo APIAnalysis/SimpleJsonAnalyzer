@@ -6,16 +6,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisValidValuesAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisValidValuesAttribute(params string[] validValues)
-        {
-            this.ValidValues = new List<string>(validValues);
-        }
+namespace ApiAnalysis;
 
-        public List<string> ValidValues { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisValidValuesAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisValidValuesAttribute(params string[] validValues)
+    {
+        this.ValidValues = new List<string>(validValues);
     }
+
+    public List<string> ValidValues { get; }
 }

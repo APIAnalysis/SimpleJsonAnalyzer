@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public sealed class ApiAnalysisStringEndsWithAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisStringEndsWithAttribute(string expectedEnd)
-        {
-            this.ExpectedEnd = expectedEnd;
-        }
+namespace ApiAnalysis;
 
-        public string ExpectedEnd { get; }
+[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+public sealed class ApiAnalysisStringEndsWithAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisStringEndsWithAttribute(string expectedEnd)
+    {
+        this.ExpectedEnd = expectedEnd;
     }
+
+    public string ExpectedEnd { get; }
 }

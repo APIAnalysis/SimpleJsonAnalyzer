@@ -5,11 +5,10 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+// TODO: [IDEA] add attribute for checking boundary at a different percentage level (not the default 95%)
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisIgnoreBoundaryChecksAttribute : BaseApiAnalysisAttribute
 {
-    // TODO: [IDEA] add attribute for checking boundary at a different percentage level (not the default 95%)
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisIgnoreBoundaryChecksAttribute : BaseApiAnalysisAttribute
-    {
-    }
 }

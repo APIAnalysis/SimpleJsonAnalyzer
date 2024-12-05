@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public sealed class ApiAnalysisIgnoreTypeDifferenceForAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisIgnoreTypeDifferenceForAttribute(Type jsonType)
-        {
-            this.JsonType = jsonType;
-        }
+namespace ApiAnalysis;
 
-        public Type JsonType { get; }
+[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+public sealed class ApiAnalysisIgnoreTypeDifferenceForAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisIgnoreTypeDifferenceForAttribute(Type jsonType)
+    {
+        this.JsonType = jsonType;
     }
+
+    public Type JsonType { get; }
 }

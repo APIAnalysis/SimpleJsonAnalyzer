@@ -11,193 +11,192 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+// ReSharper disable once InconsistentNaming
+[TestClass]
+public class IEnumerables
 {
-    // ReSharper disable once InconsistentNaming
-    [TestClass]
-    public class IEnumerables
+    public class SimpleIEnumerableStringPropertyClass
     {
-        public class SimpleIEnumerableStringPropertyClass
-        {
-            public string Items { get; set; }
-        }
+        public string Items { get; set; }
+    }
 
-        public class SimpleIEnumerableTestClass
-        {
-            public IEnumerable<string> Items { get; set; }
-        }
+    public class SimpleIEnumerableTestClass
+    {
+        public IEnumerable<string> Items { get; set; }
+    }
 
-        public class SimpleIEnumerableTestWithNestedClass
-        {
-            public IEnumerable<Child> Kids { get; set; }
-        }
+    public class SimpleIEnumerableTestWithNestedClass
+    {
+        public IEnumerable<Child> Kids { get; set; }
+    }
 
-        public class SimpleObservableCollectionTestWithNestedClass
-        {
-            public ObservableCollection<Child> Kids { get; set; }
-        }
+    public class SimpleObservableCollectionTestWithNestedClass
+    {
+        public ObservableCollection<Child> Kids { get; set; }
+    }
 
-        public class Child
-        {
-            public string Name { get; set; }
+    public class Child
+    {
+        public string Name { get; set; }
 
-            public int Age { get; set; }
-        }
+        public int Age { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected()
-        {
-            var json = "{\"Items\":[\"one\", \"two\"]}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected()
+    {
+        var json = "{\"Items\":[\"one\", \"two\"]}";
 
-            var deserialized = JsonConvert.DeserializeObject<SimpleIEnumerableTestClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleIEnumerableTestClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(2, deserialized.Items.Count());
-            Assert.AreEqual("one", deserialized.Items.First());
-            Assert.AreEqual("two", deserialized.Items.Last());
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(2, deserialized.Items.Count());
+        Assert.AreEqual("one", deserialized.Items.First());
+        Assert.AreEqual("two", deserialized.Items.Last());
+    }
 
-        [TestMethod]
-        public void OfSimpleTypes_HandledOk()
-        {
-            var json = "[\"one\", \"two\"]";
+    [TestMethod]
+    public void OfSimpleTypes_HandledOk()
+    {
+        var json = "[\"one\", \"two\"]";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void OfWrongSimpleTypes_HandledOk()
-        {
-            var json = "[3, 4, 5]";
+    [TestMethod]
+    public void OfWrongSimpleTypes_HandledOk()
+    {
+        var json = "[3, 4, 5]";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.ArrayOfUnexpectedTypeMessage(typeof(string), JTokenType.Integer), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.ArrayOfUnexpectedTypeMessage(typeof(string), JTokenType.Integer), resp.First());
+    }
 
-        [TestMethod]
-        public void OfComplexTypes_HandledOk()
-        {
-            var json = "[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]";
+    [TestMethod]
+    public void OfComplexTypes_HandledOk()
+    {
+        var json = "[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(IEnumerable<Child>)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(IEnumerable<Child>)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void OfComplexTypesAsProperty_HandledOk()
-        {
-            var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
+    [TestMethod]
+    public void OfComplexTypesAsProperty_HandledOk()
+    {
+        var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestWithNestedClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestWithNestedClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void ObservableCollectionAsProperty_HandledOk()
-        {
-            var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
+    [TestMethod]
+    public void ObservableCollectionAsProperty_HandledOk()
+    {
+        var json = "{\"Kids\":[{\"Name\":\"Jonny\",\"Age\":7}, {\"Name\":\"Sally\",\"Age\":13}]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleObservableCollectionTestWithNestedClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleObservableCollectionTestWithNestedClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void EmptyValue_HandledOk()
-        {
-            var json = "[]";
+    [TestMethod]
+    public void EmptyValue_HandledOk()
+    {
+        var json = "[]";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(List<string>)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void EmptyValueAsProperty_HandledOk()
-        {
-            var json = "{\"Items\":[]}";
+    [TestMethod]
+    public void EmptyValueAsProperty_HandledOk()
+    {
+        var json = "{\"Items\":[]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void AsProperty_HandledOk()
-        {
-            var json = "{\"Items\":[\"one\", \"two\"]}";
+    [TestMethod]
+    public void AsProperty_HandledOk()
+    {
+        var json = "{\"Items\":[\"one\", \"two\"]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void OfDifferentTypes_ReportedOk()
-        {
-            var json = "{\"Items\":[1, 2]}";
+    [TestMethod]
+    public void OfDifferentTypes_ReportedOk()
+    {
+        var json = "{\"Items\":[1, 2]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.ArrayOfUnexpectedTypeMessage(typeof(string), JTokenType.Integer), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.ArrayOfUnexpectedTypeMessage(typeof(string), JTokenType.Integer), resp.First());
+    }
 
-        [TestMethod]
-        public void ExpectedButNotReturned_ReportedOk()
-        {
-            var json = "{}";
+    [TestMethod]
+    public void ExpectedButNotReturned_ReportedOk()
+    {
+        var json = "{}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableTestClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(SimpleIEnumerableTestClass), nameof(SimpleIEnumerableTestClass.Items))), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(SimpleIEnumerableTestClass), nameof(SimpleIEnumerableTestClass.Items))), resp.First());
+    }
 
-        [TestMethod]
-        public void ReturnedButNotExpected_ReportedOk()
-        {
-            var json = "{\"Items\":[\"one\", \"two\"]}";
+    [TestMethod]
+    public void ReturnedButNotExpected_ReportedOk()
+    {
+        var json = "{\"Items\":[\"one\", \"two\"]}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableStringPropertyClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleIEnumerableStringPropertyClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleIEnumerableStringPropertyClass), nameof(SimpleIEnumerableStringPropertyClass.Items)), typeof(string), JTokenType.Array), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.UnexpectedTypeMessage(PropertyInfoHelper.Get(typeof(SimpleIEnumerableStringPropertyClass), nameof(SimpleIEnumerableStringPropertyClass.Items)), typeof(string), JTokenType.Array), resp.First());
     }
 }

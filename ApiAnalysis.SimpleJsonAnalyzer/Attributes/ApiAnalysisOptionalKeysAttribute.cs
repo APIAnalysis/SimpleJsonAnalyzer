@@ -6,16 +6,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisOptionalKeysAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisOptionalKeysAttribute(params string[] optionalKeys)
-        {
-            this.OptionalKeys = new List<string>(optionalKeys);
-        }
+namespace ApiAnalysis;
 
-        public List<string> OptionalKeys { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisOptionalKeysAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisOptionalKeysAttribute(params string[] optionalKeys)
+    {
+        this.OptionalKeys = new List<string>(optionalKeys);
     }
+
+    public List<string> OptionalKeys { get; }
 }

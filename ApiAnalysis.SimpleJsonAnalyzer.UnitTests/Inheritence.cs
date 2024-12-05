@@ -8,60 +8,59 @@ using ApiAnalysis.UnitTests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class Inheritence
 {
-    [TestClass]
-    public class Inheritence
+    public class BaseClass
     {
-        public class BaseClass
-        {
-            public string Name { get; set; }
+        public string Name { get; set; }
 
-            public int Id { get; set; }
-        }
+        public int Id { get; set; }
+    }
 
-        public class ChildClass : BaseClass
-        {
-            public string Label { get; set; }
-        }
+    public class ChildClass : BaseClass
+    {
+        public string Label { get; set; }
+    }
 
-        [TestMethod]
-        public void ValidJsonDeserializesAsExpected()
-        {
-            var json = "{\"Id\":1,\"Name\":\"Fred\",\"Label\":\"Test value\"}";
+    [TestMethod]
+    public void ValidJsonDeserializesAsExpected()
+    {
+        var json = "{\"Id\":1,\"Name\":\"Fred\",\"Label\":\"Test value\"}";
 
-            var deserialized = JsonConvert.DeserializeObject<ChildClass>(json);
+        var deserialized = JsonConvert.DeserializeObject<ChildClass>(json);
 
-            Assert.IsNotNull(deserialized);
-            Assert.AreEqual(1, deserialized.Id);
-            Assert.AreEqual("Fred", deserialized.Name);
-            Assert.AreEqual("Test value", deserialized.Label);
-        }
+        Assert.IsNotNull(deserialized);
+        Assert.AreEqual(1, deserialized.Id);
+        Assert.AreEqual("Fred", deserialized.Name);
+        Assert.AreEqual("Test value", deserialized.Label);
+    }
 
-        [TestMethod]
-        public void InheritedProperties_HandlesOk()
-        {
-            var json = "{\"Id\":1,\"Name\":\"Fred\",\"Label\":\"Test value\"}";
+    [TestMethod]
+    public void InheritedProperties_HandlesOk()
+    {
+        var json = "{\"Id\":1,\"Name\":\"Fred\",\"Label\":\"Test value\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(ChildClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(ChildClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
+    }
 
-        [TestMethod]
-        public void MissingInheritedProperties_DetectedOk()
-        {
-            var json = "{\"Id\":1,\"Label\":\"Test value\"}";
+    [TestMethod]
+    public void MissingInheritedProperties_DetectedOk()
+    {
+        var json = "{\"Id\":1,\"Label\":\"Test value\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(ChildClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(ChildClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(ChildClass), nameof(ChildClass.Name))), resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.MissingPropertyValueMessage(PropertyInfoHelper.Get(typeof(ChildClass), nameof(ChildClass.Name))), resp.First());
     }
 }

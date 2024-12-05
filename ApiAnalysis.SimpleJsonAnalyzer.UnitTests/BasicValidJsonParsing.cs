@@ -9,35 +9,34 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApiAnalysis.UnitTests
+namespace ApiAnalysis.UnitTests;
+
+[TestClass]
+public class BasicValidJsonParsing
 {
-    [TestClass]
-    public class BasicValidJsonParsing
+    public class SimpleClass
     {
-        public class SimpleClass
-        {
-            public int Id { get; set; }
+        public int Id { get; set; }
 
-            public string Name { get; set; }
+        public string Name { get; set; }
 
-            public bool Enabled { get; set; }
+        public bool Enabled { get; set; }
 
-            public float Score { get; set; }
+        public float Score { get; set; }
 
-            public Uri Website { get; set; }
-        }
+        public Uri Website { get; set; }
+    }
 
-        [TestMethod]
-        public void SimpleClassLooksOk()
-        {
-            var json = "{\"Id\":1,\"Name\":\"Fred\",\"Enabled\":true,\"Score\":99.999,\"Website\":\"http://www.example.com\"}";
+    [TestMethod]
+    public void SimpleClassLooksOk()
+    {
+        var json = "{\"Id\":1,\"Name\":\"Fred\",\"Enabled\":true,\"Score\":99.999,\"Website\":\"http://www.example.com\"}";
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleClass)).Result;
 
-            Assert.AreEqual(1, resp.Count);
-            Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
-        }
+        Assert.AreEqual(1, resp.Count);
+        Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());
     }
 }

@@ -6,13 +6,12 @@
 using System;
 using System.Reflection;
 
-namespace ApiAnalysis.UnitTests.Helpers
+namespace ApiAnalysis.UnitTests.Helpers;
+
+public static class PropertyInfoHelper
 {
-    public static class PropertyInfoHelper
+    public static PropertyInfo Get(Type containingClass, string propertyName)
     {
-        public static PropertyInfo Get(Type containingClass, string propertyName)
-        {
-            return containingClass.GetProperty(propertyName);
-        }
+        return containingClass.GetProperty(propertyName);
     }
 }

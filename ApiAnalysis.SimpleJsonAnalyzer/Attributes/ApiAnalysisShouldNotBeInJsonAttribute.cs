@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisShouldNotBeInJsonAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisShouldNotBeInJsonAttribute(string reason)
-        {
-            this.Reason = reason;
-        }
+namespace ApiAnalysis;
 
-        public string Reason { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisShouldNotBeInJsonAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisShouldNotBeInJsonAttribute(string reason)
+    {
+        this.Reason = reason;
     }
+
+    public string Reason { get; }
 }

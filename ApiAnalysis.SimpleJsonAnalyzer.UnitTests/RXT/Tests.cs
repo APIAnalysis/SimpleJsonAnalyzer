@@ -8,24 +8,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApiAnalysis.UnitTests.RXT
+namespace ApiAnalysis.UnitTests.RXT;
+
+[TestClass]
+public class Tests
 {
-    [TestClass]
-    public class Tests
+    [TestMethod]
+    public async Task XamFormsProfileTest()
     {
-        [TestMethod]
-        public async Task XamFormsProfileTest()
-        {
-            var filePath = ".\\RXT\\Xamarin.Forms C# StackLayout.rxprofile";
+        var filePath = ".\\RXT\\Xamarin.Forms C# StackLayout.rxprofile";
 
-            var fileContents = File.ReadAllText(filePath);
+        var fileContents = File.ReadAllText(filePath);
 
-            var analyzer = new SimpleJsonAnalyzer();
+        var analyzer = new SimpleJsonAnalyzer();
 
-            var analyzerResults = await analyzer.AnalyzeJsonAsync(fileContents, typeof(RapidXamlToolkit.Options.Profile));
+        var analyzerResults = await analyzer.AnalyzeJsonAsync(fileContents, typeof(RapidXamlToolkit.Options.Profile));
 
-            Assert.AreEqual(1, analyzerResults.Count);
-            Assert.AreEqual(analyzer.MessageBuilder.AllGoodMessage, analyzerResults.First());
-        }
+        Assert.AreEqual(1, analyzerResults.Count);
+        Assert.AreEqual(analyzer.MessageBuilder.AllGoodMessage, analyzerResults.First());
     }
 }

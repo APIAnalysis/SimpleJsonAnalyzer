@@ -5,16 +5,15 @@
 
 using System;
 
-namespace ApiAnalysis
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisPartOfSubsetAttribute : BaseApiAnalysisAttribute
-    {
-        public ApiAnalysisPartOfSubsetAttribute(string subsetName)
-        {
-            this.SubsetName = subsetName;
-        }
+namespace ApiAnalysis;
 
-        public string SubsetName { get; }
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisPartOfSubsetAttribute : BaseApiAnalysisAttribute
+{
+    public ApiAnalysisPartOfSubsetAttribute(string subsetName)
+    {
+        this.SubsetName = subsetName;
     }
+
+    public string SubsetName { get; }
 }

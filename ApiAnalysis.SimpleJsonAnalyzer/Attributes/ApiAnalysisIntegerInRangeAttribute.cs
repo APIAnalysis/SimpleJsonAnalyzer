@@ -5,19 +5,18 @@
 
 using System;
 
-namespace ApiAnalysis
+namespace ApiAnalysis;
+
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ApiAnalysisIntegerInRangeAttribute : BaseApiAnalysisAttribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ApiAnalysisIntegerInRangeAttribute : BaseApiAnalysisAttribute
+    public ApiAnalysisIntegerInRangeAttribute(int lowest, int highest)
     {
-        public ApiAnalysisIntegerInRangeAttribute(int lowest, int highest)
-        {
-            this.Lowest = lowest;
-            this.Highest = highest;
-        }
-
-        public int Lowest { get; }
-
-        public int Highest { get; }
+        this.Lowest = lowest;
+        this.Highest = highest;
     }
+
+    public int Lowest { get; }
+
+    public int Highest { get; }
 }
