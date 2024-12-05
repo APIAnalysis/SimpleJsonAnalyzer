@@ -17,22 +17,19 @@ namespace ApiAnalysis
         {
             foreach (var customAttributeData in pi.CustomAttributes)
             {
-                if (customAttributeData.AttributeType?.Name == nameof(JsonPropertyAttribute))
+                if (customAttributeData.AttributeType?.Name != nameof(JsonPropertyAttribute))
+                    continue;
+
+                if (customAttributeData.ConstructorArguments.Any())
+                    return customAttributeData.ConstructorArguments[0].Value.ToString();
+
+                if (customAttributeData.NamedArguments == null)
+                    continue;
+
+                foreach (var namedArgument in customAttributeData.NamedArguments)
                 {
-                    if (customAttributeData.ConstructorArguments.Any())
-                    {
-                        return customAttributeData.ConstructorArguments[0].Value.ToString();
-                    }
-                    else if (customAttributeData.NamedArguments != null)
-                    {
-                        foreach (var namedArgument in customAttributeData.NamedArguments)
-                        {
-                            if (namedArgument.MemberName == nameof(JsonPropertyAttribute.PropertyName))
-                            {
-                                return namedArgument.TypedValue.Value.ToString();
-                            }
-                        }
-                    }
+                    if (namedArgument.MemberName == nameof(JsonPropertyAttribute.PropertyName))
+                        return namedArgument.TypedValue.Value.ToString();
                 }
             }
 
