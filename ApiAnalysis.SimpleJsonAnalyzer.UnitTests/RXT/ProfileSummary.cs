@@ -17,14 +17,14 @@ public class ProfileSummary : CanNotifyPropertyChanged
     {
         get
         {
-            return this.isActive;
+            return isActive;
         }
 
         set
         {
-            this.isActive = value;
-            this.OnPropertyChanged();
-            this.OnPropertyChanged(nameof(this.DisplayName));
+            isActive = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(DisplayName));
         }
     }
 
@@ -32,13 +32,13 @@ public class ProfileSummary : CanNotifyPropertyChanged
     {
         get
         {
-            if (this.IsActive)
+            if (IsActive)
             {
-                return this.Name;
+                return Name;
             }
             else
             {
-                return this.Name;
+                return Name;
             }
         }
     }

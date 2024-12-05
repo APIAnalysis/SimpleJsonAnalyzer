@@ -42,32 +42,32 @@ public class BoundaryChecks
     [TestMethod]
     public void Byte_NoWarning_ForZero()
     {
-        this.ByteBoundaryChecksWarned(0, false);
+        ByteBoundaryChecksWarned(0, false);
     }
 
     [TestMethod]
     public void Byte_NoWarning_ForOne()
     {
-        this.ByteBoundaryChecksWarned(1, false);
+        ByteBoundaryChecksWarned(1, false);
     }
 
     // boundary = byte.MaxValue * .95 = 242.25
     [TestMethod]
     public void Byte_NoWarning_ForJustBelowBoundary()
     {
-        this.ByteBoundaryChecksWarned(242, false);
+        ByteBoundaryChecksWarned(242, false);
     }
 
     [TestMethod]
     public void Byte_Warning_ForJustOverBoundary()
     {
-        this.ByteBoundaryChecksWarned(243, true);
+        ByteBoundaryChecksWarned(243, true);
     }
 
     [TestMethod]
     public void Byte_Warning_ForMaxValue()
     {
-        this.ByteBoundaryChecksWarned(byte.MaxValue, true);
+        ByteBoundaryChecksWarned(byte.MaxValue, true);
     }
 
     // Using this and all the above as DataRow tests are not yet supplorted in class library tests
@@ -94,32 +94,32 @@ public class BoundaryChecks
     [TestMethod]
     public void Int_NoWarning_ForZero()
     {
-        this.IntBoundaryChecksWarned(0, false);
+        IntBoundaryChecksWarned(0, false);
     }
 
     [TestMethod]
     public void Int_NoWarning_ForOne()
     {
-        this.IntBoundaryChecksWarned(1, false);
+        IntBoundaryChecksWarned(1, false);
     }
 
     // boundary = int.MaxValue * .95 = 2040109464.6499999
     [TestMethod]
     public void Int_NoWarning_ForJustBelowBoundary()
     {
-        this.IntBoundaryChecksWarned(2040109464, false);
+        IntBoundaryChecksWarned(2040109464, false);
     }
 
     [TestMethod]
     public void Int_Warning_ForJustOverBoundary()
     {
-        this.IntBoundaryChecksWarned(2040109465, true);
+        IntBoundaryChecksWarned(2040109465, true);
     }
 
     [TestMethod]
     public void Int_Warning_ForMaxValue()
     {
-        this.IntBoundaryChecksWarned(int.MaxValue, true);
+        IntBoundaryChecksWarned(int.MaxValue, true);
     }
 
     public void IntBoundaryChecksWarned(int value, bool shouldCreateWarning)
@@ -145,38 +145,38 @@ public class BoundaryChecks
     [TestMethod]
     public void Long_NoWarning_ForZero()
     {
-        this.LongBoundaryChecksWarned(0, false);
+        LongBoundaryChecksWarned(0, false);
     }
 
     [TestMethod]
     public void Long_NoWarning_ForOne()
     {
-        this.LongBoundaryChecksWarned(1, false);
+        LongBoundaryChecksWarned(1, false);
     }
 
     // boundary = long.MaxValue * .95 = 8.7622034350120366E+18 (~ 8762203435012037120)
     [TestMethod]
     public void Long_NoWarning_ForJustBelowBoundary()
     {
-        this.LongBoundaryChecksWarned(8762203435012037119, false);
+        LongBoundaryChecksWarned(8762203435012037119, false);
     }
 
     [TestMethod]
     public void Long_NoWarning_ForBoundary()
     {
-        this.LongBoundaryChecksWarned(8762203435012037120, false);
+        LongBoundaryChecksWarned(8762203435012037120, false);
     }
 
     [TestMethod]
     public void Long_Warning_ForJustOverBoundary()
     {
-        this.LongBoundaryChecksWarned(8762203435012037121, true);
+        LongBoundaryChecksWarned(8762203435012037121, true);
     }
 
     [TestMethod]
     public void Long_Warning_ForMaxValue()
     {
-        this.LongBoundaryChecksWarned(long.MaxValue, true);
+        LongBoundaryChecksWarned(long.MaxValue, true);
     }
 
     public void LongBoundaryChecksWarned(long value, bool shouldCreateWarning)

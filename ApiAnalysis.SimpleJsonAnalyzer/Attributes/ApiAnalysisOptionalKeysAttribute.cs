@@ -13,7 +13,7 @@ public sealed class ApiAnalysisOptionalKeysAttribute : BaseApiAnalysisAttribute
 {
     public ApiAnalysisOptionalKeysAttribute(params string[] optionalKeys)
     {
-        this.OptionalKeys = new List<string>(optionalKeys);
+        OptionalKeys = new List<string>(optionalKeys);
     }
 
     public List<string> OptionalKeys { get; }

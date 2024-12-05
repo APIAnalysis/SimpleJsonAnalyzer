@@ -12,7 +12,7 @@ public sealed class ApiAnalysisStringMinimumLengthAttribute : BaseApiAnalysisAtt
 {
     public ApiAnalysisStringMinimumLengthAttribute(int minLength)
     {
-        this.MinimumAcceptableLength = minLength;
+        MinimumAcceptableLength = minLength;
     }
 
     public int MinimumAcceptableLength { get; }

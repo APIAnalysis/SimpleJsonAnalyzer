@@ -12,7 +12,7 @@ public sealed class ApiAnalysisStringEndsWithAttribute : BaseApiAnalysisAttribut
 {
     public ApiAnalysisStringEndsWithAttribute(string expectedEnd)
     {
-        this.ExpectedEnd = expectedEnd;
+        ExpectedEnd = expectedEnd;
     }
 
     public string ExpectedEnd { get; }

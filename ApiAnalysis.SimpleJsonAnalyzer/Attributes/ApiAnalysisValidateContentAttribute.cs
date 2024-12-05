@@ -13,14 +13,14 @@ public sealed class ApiAnalysisValidateContentAttribute : BaseApiAnalysisAttribu
 {
     public ApiAnalysisValidateContentAttribute(Type jsonType)
     {
-        this.JsonType = jsonType;
+        JsonType = jsonType;
     }
 
     public ApiAnalysisValidateContentAttribute(Type jsonType, string replaceThis, string withThis)
     {
-        this.JsonType = jsonType;
-        this.ReplaceThis = replaceThis;
-        this.WithThis = withThis;
+        JsonType = jsonType;
+        ReplaceThis = replaceThis;
+        WithThis = withThis;
     }
 
     public Type JsonType { get; }

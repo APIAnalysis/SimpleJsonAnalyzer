@@ -16,7 +16,7 @@ public class ReadOnlyProperties
     {
         public int Value { get; set; }
 
-        public string FormattedValue => $"--{this.Value}--";
+        public string FormattedValue => $"--{Value}--";
     }
 
     private string json = "{\"Value\":1}";
@@ -24,7 +24,7 @@ public class ReadOnlyProperties
     [TestMethod]
     public void ValidJsonDeserializes_AsExpected()
     {
-        var deserialized = JsonConvert.DeserializeObject<SimpleReadOnlyTestClass>(this.json);
+        var deserialized = JsonConvert.DeserializeObject<SimpleReadOnlyTestClass>(json);
 
         Assert.IsNotNull(deserialized);
         Assert.AreEqual(1, deserialized.Value);
@@ -36,7 +36,7 @@ public class ReadOnlyProperties
     {
         var analyzer = new SimpleJsonAnalyzer();
 
-        var resp = analyzer.AnalyzeJsonAsync(this.json, typeof(SimpleReadOnlyTestClass)).Result;
+        var resp = analyzer.AnalyzeJsonAsync(json, typeof(SimpleReadOnlyTestClass)).Result;
 
         Assert.AreEqual(1, resp.Count);
         Assert.AreEqual(MessageBuilder.Get.AllGoodMessage, resp.First());

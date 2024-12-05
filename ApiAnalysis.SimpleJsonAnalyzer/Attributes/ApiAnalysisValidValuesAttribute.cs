@@ -13,7 +13,7 @@ public sealed class ApiAnalysisValidValuesAttribute : BaseApiAnalysisAttribute
 {
     public ApiAnalysisValidValuesAttribute(params string[] validValues)
     {
-        this.ValidValues = new List<string>(validValues);
+        ValidValues = new List<string>(validValues);
     }
 
     public List<string> ValidValues { get; }

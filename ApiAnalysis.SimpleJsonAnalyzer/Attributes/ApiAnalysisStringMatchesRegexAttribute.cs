@@ -12,7 +12,7 @@ public sealed class ApiAnalysisStringMatchesRegexAttribute : BaseApiAnalysisAttr
 {
     public ApiAnalysisStringMatchesRegexAttribute(string pattern)
     {
-        this.Pattern = pattern;
+        Pattern = pattern;
     }
 
     public string Pattern { get; }

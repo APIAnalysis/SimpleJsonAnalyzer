@@ -12,7 +12,7 @@ public sealed class ApiAnalysisIgnoreTypeDifferenceForAttribute : BaseApiAnalysi
 {
     public ApiAnalysisIgnoreTypeDifferenceForAttribute(Type jsonType)
     {
-        this.JsonType = jsonType;
+        JsonType = jsonType;
     }
 
     public Type JsonType { get; }

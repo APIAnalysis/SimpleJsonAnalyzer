@@ -12,7 +12,7 @@ public sealed class ApiAnalysisPartOfSubsetAttribute : BaseApiAnalysisAttribute
 {
     public ApiAnalysisPartOfSubsetAttribute(string subsetName)
     {
-        this.SubsetName = subsetName;
+        SubsetName = subsetName;
     }
 
     public string SubsetName { get; }

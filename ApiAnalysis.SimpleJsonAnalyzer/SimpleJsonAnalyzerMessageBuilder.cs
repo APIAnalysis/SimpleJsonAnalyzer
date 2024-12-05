@@ -32,7 +32,7 @@ public class SimpleJsonAnalyzerMessageBuilder : ISimpleJsonAnalyzerMessageBuilde
 
     public string InvalidPropertyValueMessage(string unexpectedValue, PropertyInfo property)
     {
-        return this.ExceptionalValueMessage(unexpectedValue, property, "was not a valid value.");
+        return ExceptionalValueMessage(unexpectedValue, property, "was not a valid value.");
     }
 
     public string JsonIncludesUnexpectedPropertyMessage(JProperty property, Type type)
@@ -93,7 +93,7 @@ public class SimpleJsonAnalyzerMessageBuilder : ISimpleJsonAnalyzerMessageBuilde
 
     public string UnexpectedStartValueMessage(PropertyInfo property, string receivedValue, string expectedStart)
     {
-        return this.ExceptionalValueMessage(receivedValue, property, "was supposed to start with", expectedStart);
+        return ExceptionalValueMessage(receivedValue, property, "was supposed to start with", expectedStart);
     }
 
     public string UnexpectedStringForEnumMessage(PropertyInfo property, string jsonValue)
@@ -113,32 +113,32 @@ public class SimpleJsonAnalyzerMessageBuilder : ISimpleJsonAnalyzerMessageBuilde
 
     public string ValueWasHigherThanBoundaryMessage(string value, PropertyInfo property, int boundary)
     {
-        return this.ExceptionalValueMessage(value, property, "should not be higher than", boundary.ToString());
+        return ExceptionalValueMessage(value, property, "should not be higher than", boundary.ToString());
     }
 
     public string ValueIsCloseToMaxMessage(string value, PropertyInfo property, Type type)
     {
-        return this.ExceptionalValueMessage(value, property, "is getting close to the max value for a", type.Name);
+        return ExceptionalValueMessage(value, property, "is getting close to the max value for a", type.Name);
     }
 
     public string ValueWasLowerThanBoundaryMessage(string value, PropertyInfo property, int boundary)
     {
-        return this.ExceptionalValueMessage(value, property, "should not be lower than", boundary.ToString());
+        return ExceptionalValueMessage(value, property, "should not be lower than", boundary.ToString());
     }
 
     public string ValueWasSupposedToContainMessage(string value, PropertyInfo property, string shouldContain)
     {
-        return this.ExceptionalValueMessage(value, property, "was supposed to contain", shouldContain);
+        return ExceptionalValueMessage(value, property, "was supposed to contain", shouldContain);
     }
 
     public string ValueWasSupposedToEndWithMessage(string value, PropertyInfo property, string expectedEnding)
     {
-        return this.ExceptionalValueMessage(value, property, "was supposed to end with", expectedEnding);
+        return ExceptionalValueMessage(value, property, "was supposed to end with", expectedEnding);
     }
 
     public string ValueWasSupposedToMatchPatternMessage(string value, PropertyInfo property, string patternToMatch)
     {
-        return this.ExceptionalValueMessage(value, property, "was supposed to match with", patternToMatch);
+        return ExceptionalValueMessage(value, property, "was supposed to match with", patternToMatch);
     }
 
     private string ExceptionalValueMessage(string value, PropertyInfo property, string expectedCondition, string suffix = null)

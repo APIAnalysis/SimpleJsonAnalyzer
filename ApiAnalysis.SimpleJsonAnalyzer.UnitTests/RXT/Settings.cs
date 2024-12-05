@@ -26,15 +26,15 @@ public class Settings : CanNotifyPropertyChanged
             // If multile profiles have the same name as the active profile, use the first one in the list with matcing name
             bool activeIndicated = false;
 
-            for (var index = 0; index < this.Profiles.Count; index++)
+            for (var index = 0; index < Profiles.Count; index++)
             {
-                var profile = this.Profiles[index];
+                var profile = Profiles[index];
 
                 var summary = new ProfileSummary
                 {
                     Index = index,
                     Name = profile.Name,
-                    IsActive = !activeIndicated && profile.Name == this.ActiveProfileName,
+                    IsActive = !activeIndicated && profile.Name == ActiveProfileName,
                 };
 
                 if (summary.IsActive)
@@ -49,27 +49,27 @@ public class Settings : CanNotifyPropertyChanged
         }
     }
 
-    public bool IsActiveProfileSet => !string.IsNullOrWhiteSpace(this.ActiveProfileName);
+    public bool IsActiveProfileSet => !string.IsNullOrWhiteSpace(ActiveProfileName);
 
     public Profile GetActiveProfile()
     {
         Profile result = null;
 
-        if (!string.IsNullOrEmpty(this.ActiveProfileName))
+        if (!string.IsNullOrEmpty(ActiveProfileName))
         {
-            result = this.Profiles.FirstOrDefault(p => p.Name == this.ActiveProfileName);
+            result = Profiles.FirstOrDefault(p => p.Name == ActiveProfileName);
         }
 
-        return result ?? this.Profiles.FirstOrDefault();
+        return result ?? Profiles.FirstOrDefault();
     }
 
     public List<string> GetAllProfileNames()
     {
-        return this.Profiles.Select(p => p.Name).ToList();
+        return Profiles.Select(p => p.Name).ToList();
     }
 
     public void RefreshProfilesList()
     {
-        this.OnPropertyChanged(nameof(this.ProfilesList));
+        OnPropertyChanged(nameof(ProfilesList));
     }
 }

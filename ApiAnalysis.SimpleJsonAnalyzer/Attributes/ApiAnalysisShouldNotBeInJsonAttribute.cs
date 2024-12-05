@@ -12,7 +12,7 @@ public sealed class ApiAnalysisShouldNotBeInJsonAttribute : BaseApiAnalysisAttri
 {
     public ApiAnalysisShouldNotBeInJsonAttribute(string reason)
     {
-        this.Reason = reason;
+        Reason = reason;
     }
 
     public string Reason { get; }

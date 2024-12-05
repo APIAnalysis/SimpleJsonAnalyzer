@@ -12,7 +12,7 @@ public sealed class ApiAnalysisStringContainsAttribute : BaseApiAnalysisAttribut
 {
     public ApiAnalysisStringContainsAttribute(string expected)
     {
-        this.Expected = expected;
+        Expected = expected;
     }
 
     public string Expected { get; }

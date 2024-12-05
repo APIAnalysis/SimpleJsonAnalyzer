@@ -14,9 +14,9 @@ public sealed class ApiAnalysisConditionallyValidateContentAttribute : BaseApiAn
 {
     public ApiAnalysisConditionallyValidateContentAttribute(Type jsonType, string property, string value)
     {
-        this.JsonType = jsonType;
-        this.Property = property;
-        this.Value = value;
+        JsonType = jsonType;
+        Property = property;
+        Value = value;
     }
 
     public Type JsonType { get; }

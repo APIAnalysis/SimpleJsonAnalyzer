@@ -13,7 +13,7 @@ public sealed class ApiAnalysisMandatoryKeysAttribute : BaseApiAnalysisAttribute
 {
     public ApiAnalysisMandatoryKeysAttribute(params string[] mandatoryKeys)
     {
-        this.MandatoryKeys = new List<string>(mandatoryKeys);
+        MandatoryKeys = new List<string>(mandatoryKeys);
     }
 
     public List<string> MandatoryKeys { get; }

@@ -12,8 +12,8 @@ public sealed class ApiAnalysisIntegerInRangeAttribute : BaseApiAnalysisAttribut
 {
     public ApiAnalysisIntegerInRangeAttribute(int lowest, int highest)
     {
-        this.Lowest = lowest;
-        this.Highest = highest;
+        Lowest = lowest;
+        Highest = highest;
     }
 
     public int Lowest { get; }

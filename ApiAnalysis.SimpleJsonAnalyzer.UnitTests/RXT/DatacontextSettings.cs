@@ -13,22 +13,22 @@ public class DatacontextSettings
     public string XamlPageAttribute { get; set; }
 
     [IgnoreDataMember]
-    public bool SetsXamlPageAttribute => !string.IsNullOrWhiteSpace(this.XamlPageAttribute);
+    public bool SetsXamlPageAttribute => !string.IsNullOrWhiteSpace(XamlPageAttribute);
 
     [AllowedPlaceholders(Placeholder.ViewModelClass, Placeholder.ViewModelNamespace)]
     public string CodeBehindPageContent { get; set; }
 
     [IgnoreDataMember]
-    public bool SetsCodeBehindPageContent => !string.IsNullOrWhiteSpace(this.CodeBehindPageContent);
+    public bool SetsCodeBehindPageContent => !string.IsNullOrWhiteSpace(CodeBehindPageContent);
 
     [AllowedPlaceholders(Placeholder.ViewModelClass)]
     public string CodeBehindConstructorContent { get; set; }
 
     [IgnoreDataMember]
-    public bool SetsCodeBehindConstructorContent => !string.IsNullOrWhiteSpace(this.CodeBehindConstructorContent);
+    public bool SetsCodeBehindConstructorContent => !string.IsNullOrWhiteSpace(CodeBehindConstructorContent);
 
     [IgnoreDataMember]
-    public bool SetsAnyCodeBehindContent => this.SetsCodeBehindConstructorContent || this.SetsCodeBehindPageContent;
+    public bool SetsAnyCodeBehindContent => SetsCodeBehindConstructorContent || SetsCodeBehindPageContent;
 
     [AllowedPlaceholders(Placeholder.ViewClass)]
     public string DefaultCodeBehindConstructor { get; set; }

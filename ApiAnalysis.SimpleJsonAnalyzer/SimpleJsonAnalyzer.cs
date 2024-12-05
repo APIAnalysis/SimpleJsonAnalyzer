@@ -30,16 +30,16 @@ public class SimpleJsonAnalyzer
         this.messageBuilder = messageBuilder ?? new SimpleJsonAnalyzerMessageBuilder();
     }
 
-    public ISimpleJsonAnalyzerMessageBuilder MessageBuilder => this.messageBuilder;
+    public ISimpleJsonAnalyzerMessageBuilder MessageBuilder => messageBuilder;
 
     public async Task<List<string>> AnalyzeJsonAsync(string jsonToAnalyze, Type typeToCompareWith)
     {
         if (string.IsNullOrEmpty(jsonToAnalyze))
         {
-            return new List<string> { this.messageBuilder.MissingValidJsonMessage };
+            return new List<string> { messageBuilder.MissingValidJsonMessage };
         }
 
-        return await this.AnalyzeJsonInternalAsync(jsonToAnalyze, typeToCompareWith);
+        return await AnalyzeJsonInternalAsync(jsonToAnalyze, typeToCompareWith);
     }
 
     private void PerformChecksRelativeToJsonPropertyRequired(PropertyInfo pocoProperty, JProperty jsonProperty, List<string> result)
@@ -54,7 +54,7 @@ public class SimpleJsonAnalyzer
             {
                 if (required == Required.Always || required == Required.DisallowNull)
                 {
-                    result.Add(this.messageBuilder.UnexpectedNullMessage(pocoProperty));
+                    result.Add(messageBuilder.UnexpectedNullMessage(pocoProperty));
                 }
             }
         }
@@ -100,7 +100,7 @@ public class SimpleJsonAnalyzer
 
             if (!Regex.IsMatch(jsonPropertyValue.ToString(), patternToMatch))
             {
-                result.Add(this.messageBuilder.ValueWasSupposedToMatchPatternMessage(jsonPropertyValue.ToString(), pocoProperty, patternToMatch));
+                result.Add(messageBuilder.ValueWasSupposedToMatchPatternMessage(jsonPropertyValue.ToString(), pocoProperty, patternToMatch));
             }
         }
     }
@@ -113,7 +113,7 @@ public class SimpleJsonAnalyzer
 
         if (jsonPropertyValue.ToString().Trim().Length < minAcceptableLength)
         {
-            result.Add(this.messageBuilder.InsufficientStringLengthMessage(pocoProperty, jsonPropertyValue.ToString(), minAcceptableLength.Value));
+            result.Add(messageBuilder.InsufficientStringLengthMessage(pocoProperty, jsonPropertyValue.ToString(), minAcceptableLength.Value));
         }
     }
 
@@ -125,7 +125,7 @@ public class SimpleJsonAnalyzer
 
         if (expectedPrefix != null && !jsonPropertyValue.ToString().StartsWith(expectedPrefix, StringComparison.Ordinal))
         {
-            result.Add(this.messageBuilder.UnexpectedStartValueMessage(pocoProperty, jsonPropertyValue.ToString(), expectedPrefix));
+            result.Add(messageBuilder.UnexpectedStartValueMessage(pocoProperty, jsonPropertyValue.ToString(), expectedPrefix));
         }
     }
 
@@ -139,7 +139,7 @@ public class SimpleJsonAnalyzer
 
             if (!jsonPropertyValue.ToString().EndsWith(expectedSuffix, StringComparison.Ordinal))
             {
-                result.Add(this.messageBuilder.ValueWasSupposedToEndWithMessage(jsonPropertyValue.ToString(), pocoProperty, expectedSuffix));
+                result.Add(messageBuilder.ValueWasSupposedToEndWithMessage(jsonPropertyValue.ToString(), pocoProperty, expectedSuffix));
             }
         }
     }
@@ -154,7 +154,7 @@ public class SimpleJsonAnalyzer
 
             if (!jsonPropertyValue.ToString().Contains(shouldContain))
             {
-                result.Add(this.messageBuilder.ValueWasSupposedToContainMessage(jsonPropertyValue.ToString(), pocoProperty, shouldContain));
+                result.Add(messageBuilder.ValueWasSupposedToContainMessage(jsonPropertyValue.ToString(), pocoProperty, shouldContain));
             }
         }
     }
@@ -165,7 +165,7 @@ public class SimpleJsonAnalyzer
             && !pocoProperty.HasCustomAttribute(typeof(ApiAnalysisIgnoreBoundaryChecksAttribute))
             && ((byte)jsonPropertyValue > (byte.MaxValue * .95)))
         {
-            result.Add(this.messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(byte)));
+            result.Add(messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(byte)));
         }
     }
 
@@ -175,7 +175,7 @@ public class SimpleJsonAnalyzer
             && !pocoProperty.HasCustomAttribute(typeof(ApiAnalysisIgnoreBoundaryChecksAttribute))
             && ((int)jsonPropertyValue > (int.MaxValue * .95)))
         {
-            result.Add(this.messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(int)));
+            result.Add(messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(int)));
         }
     }
 
@@ -185,7 +185,7 @@ public class SimpleJsonAnalyzer
             && !pocoProperty.HasCustomAttribute(typeof(ApiAnalysisIgnoreBoundaryChecksAttribute))
             && ((long)jsonPropertyValue > (long.MaxValue * .95)))
         {
-            result.Add(this.messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(long)));
+            result.Add(messageBuilder.ValueIsCloseToMaxMessage(jsonPropertyValue.ToString(), pocoProperty, typeof(long)));
         }
     }
 
@@ -199,7 +199,7 @@ public class SimpleJsonAnalyzer
 
         if (!accepted?.Contains(jsonPropertyValue.ToString()) == true)
         {
-            result.Add(this.messageBuilder.InvalidPropertyValueMessage(jsonPropertyValue.ToString(), pocoProperty));
+            result.Add(messageBuilder.InvalidPropertyValueMessage(jsonPropertyValue.ToString(), pocoProperty));
         }
     }
 
@@ -213,7 +213,7 @@ public class SimpleJsonAnalyzer
 
             if ((int)jsonPropertyValue < lowestAllowed)
             {
-                result.Add(this.messageBuilder.ValueWasLowerThanBoundaryMessage(jsonPropertyValue.ToString(), pocoProperty, lowestAllowed));
+                result.Add(messageBuilder.ValueWasLowerThanBoundaryMessage(jsonPropertyValue.ToString(), pocoProperty, lowestAllowed));
             }
             else
             {
@@ -221,7 +221,7 @@ public class SimpleJsonAnalyzer
 
                 if ((int)jsonPropertyValue > highestAllowed)
                 {
-                    result.Add(this.messageBuilder.ValueWasHigherThanBoundaryMessage(jsonPropertyValue.ToString(), pocoProperty, highestAllowed));
+                    result.Add(messageBuilder.ValueWasHigherThanBoundaryMessage(jsonPropertyValue.ToString(), pocoProperty, highestAllowed));
                 }
             }
         }
@@ -299,7 +299,7 @@ public class SimpleJsonAnalyzer
             if (string.IsNullOrWhiteSpace(jsonToAnalyze))
             {
                 // TODO: this should also be better handled after the HTTP request and with a more appropriate message (e.g. server returned no content for {uri})
-                result.Add(this.messageBuilder.JsonStringIsEmptyMessage);
+                result.Add(messageBuilder.JsonStringIsEmptyMessage);
             }
             else if (jsonToAnalyze.StartsWith("[", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -326,13 +326,13 @@ public class SimpleJsonAnalyzer
 
                     if (jobject is JObject jobj)
                     {
-                        result.AddRange(await this.AnalyzeJObjectAsync(jobj, comparisonType, isRecursive: true));
+                        result.AddRange(await AnalyzeJObjectAsync(jobj, comparisonType, isRecursive: true));
                     }
                     else
                     {
                         if (jobject.Type.ToString() != comparisonType.Name)
                         {
-                            var msg = this.messageBuilder.ArrayOfUnexpectedTypeMessage(comparisonType, jobject.Type);
+                            var msg = messageBuilder.ArrayOfUnexpectedTypeMessage(comparisonType, jobject.Type);
 
                             if (!result.Contains(msg))
                             {
@@ -345,21 +345,21 @@ public class SimpleJsonAnalyzer
             else if (jsonToAnalyze.StartsWith("{", StringComparison.InvariantCultureIgnoreCase))
             {
                 var objectGeneratedFromJson = JObject.Parse(jsonToAnalyze);
-                result.AddRange(await this.AnalyzeJObjectAsync(objectGeneratedFromJson, typeToCompareWith, isRecursive, recursiveProperty));
+                result.AddRange(await AnalyzeJObjectAsync(objectGeneratedFromJson, typeToCompareWith, isRecursive, recursiveProperty));
             }
             else
             {
-                result.Add(this.messageBuilder.MissingValidJsonMessage);
+                result.Add(messageBuilder.MissingValidJsonMessage);
             }
         }
         catch (Exception ex)
         {
-            result.Add(this.messageBuilder.JsonAnalysisExceptionMessage(ex));
+            result.Add(messageBuilder.JsonAnalysisExceptionMessage(ex));
         }
 
         if (result.Count == 0 && !isRecursive)
         {
-            result.Add(this.messageBuilder.AllGoodMessage);
+            result.Add(messageBuilder.AllGoodMessage);
         }
 
         return result;
@@ -377,7 +377,7 @@ public class SimpleJsonAnalyzer
             foreach (var jsonProperty in objectToAnalyze.Properties())
             {
                 // CHECK: property in JSON exists in POCO
-                var pocoProperty = this.GetProperty(typeToCompareWith, jsonProperty.Name);
+                var pocoProperty = GetProperty(typeToCompareWith, jsonProperty.Name);
 
                 if (pocoProperty != null)
                 {
@@ -391,7 +391,7 @@ public class SimpleJsonAnalyzer
                         }
                         else
                         {
-                            result.Add(this.messageBuilder.MultipleMutuallyExclusivePropertiesMessage(typeToCompareWith, foundMutuallyExclusiveProperty, pocoProperty.Name));
+                            result.Add(messageBuilder.MultipleMutuallyExclusivePropertiesMessage(typeToCompareWith, foundMutuallyExclusiveProperty, pocoProperty.Name));
                         }
                     }
 
@@ -399,7 +399,7 @@ public class SimpleJsonAnalyzer
 
                     if (shouldNotBeInJson is ApiAnalysisShouldNotBeInJsonAttribute snbij)
                     {
-                        result.Add(this.messageBuilder.UnexpectedPropertyMessage(pocoProperty, snbij.Reason));
+                        result.Add(messageBuilder.UnexpectedPropertyMessage(pocoProperty, snbij.Reason));
                     }
 
                     var pocoPropertyType = pocoProperty.PropertyType.Name;
@@ -440,7 +440,7 @@ public class SimpleJsonAnalyzer
 
                                         if (!allKeys.Contains(key))
                                         {
-                                            result.Add(this.messageBuilder.UnknownKeyMessage(pocoProperty, key));
+                                            result.Add(messageBuilder.UnknownKeyMessage(pocoProperty, key));
                                         }
                                     }
 
@@ -451,7 +451,7 @@ public class SimpleJsonAnalyzer
                                         {
                                             if (jsonProperty.Value.Children().All(c => ((JProperty)c).Name != key))
                                             {
-                                                result.Add(this.messageBuilder.MissingMandatoryKeyMessage(pocoProperty, key));
+                                                result.Add(messageBuilder.MissingMandatoryKeyMessage(pocoProperty, key));
                                             }
                                         }
                                     }
@@ -463,14 +463,14 @@ public class SimpleJsonAnalyzer
                                 if (mandatoryKeys != null && mandatoryKeys.MandatoryKeys.Any())
                                 {
                                     result.AddRange(
-                                        mandatoryKeys.MandatoryKeys.Select(key => this.messageBuilder
+                                        mandatoryKeys.MandatoryKeys.Select(key => messageBuilder
                                             .MissingMandatoryKeyMessage(pocoProperty, key)));
                                 }
                             }
                         }
                         else
                         {
-                            result.AddRange(await this.AnalyzeJsonInternalAsync(
+                            result.AddRange(await AnalyzeJsonInternalAsync(
                                 jsonProperty.Value.ToString(),
                                 pocoProperty.PropertyType,
                                 isRecursive: true,
@@ -535,16 +535,16 @@ public class SimpleJsonAnalyzer
                             {
                                 foreach (var nestedJsonObject in jsonProperty.Value)
                                 {
-                                    nestedTypeResult.AddRange(await this.AnalyzeJsonInternalAsync(nestedJsonObject.ToString(), pocoType, isRecursive: true, recursiveProperty: pocoProperty));
+                                    nestedTypeResult.AddRange(await AnalyzeJsonInternalAsync(nestedJsonObject.ToString(), pocoType, isRecursive: true, recursiveProperty: pocoProperty));
                                 }
                             }
                             else
                             {
                                 foreach (var nestedJsonObject in jsonProperty.Value)
                                 {
-                                    if (!this.TypesAreTheSameOrEquivalent(nestedJsonObject.Type.ToString(), pocoType.Name))
+                                    if (!TypesAreTheSameOrEquivalent(nestedJsonObject.Type.ToString(), pocoType.Name))
                                     {
-                                        var msg = this.messageBuilder.ArrayOfUnexpectedTypeMessage(pocoType, nestedJsonObject.Type);
+                                        var msg = messageBuilder.ArrayOfUnexpectedTypeMessage(pocoType, nestedJsonObject.Type);
 
                                         if (!result.Contains(msg))
                                         {
@@ -580,25 +580,25 @@ public class SimpleJsonAnalyzer
 
                             if (noEmptyCollectionsAttribute != null)
                             {
-                                result.Add(this.messageBuilder.UnexpectedEmptyCollectionMessage(pocoProperty));
+                                result.Add(messageBuilder.UnexpectedEmptyCollectionMessage(pocoProperty));
                             }
                         }
                     }
 
-                    this.PerformChecksRelativeToJsonPropertyRequired(pocoProperty, jsonProperty, result);
+                    PerformChecksRelativeToJsonPropertyRequired(pocoProperty, jsonProperty, result);
 
                     var ignoreType = pocoProperty.GetCustomAttribute(typeof(ApiAnalysisIgnoreTypeDifferenceForAttribute));
 
-                    var alternatePocoType = this.GetAlternatePocoType(ignoreType, knowJsonType, pocoProperty, pocoPropertyType);
+                    var alternatePocoType = GetAlternatePocoType(ignoreType, knowJsonType, pocoProperty, pocoPropertyType);
 
                     // CHECK: types of matching property names are the same
-                    if (!this.TypesAreTheSameOrEquivalent(jsonPropertyType, pocoPropertyType)
-                        && !this.TypesAreTheSameOrEquivalent(jsonPropertyType, alternatePocoType)
-                        && !this.DataCanAutoConvertToType(jsonProperty, pocoPropertyType, pocoProperty)
-                        && !this.DataCanAutoConvertToType(jsonProperty, alternatePocoType)
-                        && !this.CanProcessWithConverter(jsonProperty, pocoProperty, result))
+                    if (!TypesAreTheSameOrEquivalent(jsonPropertyType, pocoPropertyType)
+                        && !TypesAreTheSameOrEquivalent(jsonPropertyType, alternatePocoType)
+                        && !DataCanAutoConvertToType(jsonProperty, pocoPropertyType, pocoProperty)
+                        && !DataCanAutoConvertToType(jsonProperty, alternatePocoType)
+                        && !CanProcessWithConverter(jsonProperty, pocoProperty, result))
                     {
-                        result.Add(this.messageBuilder.UnexpectedTypeMessage(pocoProperty, pocoProperty.PropertyType, jsonProperty.Value.Type));
+                        result.Add(messageBuilder.UnexpectedTypeMessage(pocoProperty, pocoProperty.PropertyType, jsonProperty.Value.Type));
                     }
                     else
                     {
@@ -607,26 +607,26 @@ public class SimpleJsonAnalyzer
                         // Avoid checks dependent on attributes if none is present
                         if (pocoProperty.HasCustomAttribute(typeof(BaseApiAnalysisAttribute)))
                         {
-                            this.CheckForConstraintOnStringMinimumLength(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForConstraintOnStringStart(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForConstraintOnStingEnd(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForConstraintOnStringContains(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForConstraintOnMatchingRegex(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForIntegersInDefinedRange(pocoProperty, jsonPropertyValue, result);
-                            this.CheckForValidListOfValues(pocoProperty, jsonPropertyValue, result);
-                            await this.CheckForValidContentOfTypesRetrievedFromUriAsync(pocoProperty, jsonPropertyValue, result);
-                            await this.CheckForValidContentOfTypesRetrievedFromUriConditionallyAsync(pocoProperty, jsonPropertyValue, objectToAnalyze, result);
+                            CheckForConstraintOnStringMinimumLength(pocoProperty, jsonPropertyValue, result);
+                            CheckForConstraintOnStringStart(pocoProperty, jsonPropertyValue, result);
+                            CheckForConstraintOnStingEnd(pocoProperty, jsonPropertyValue, result);
+                            CheckForConstraintOnStringContains(pocoProperty, jsonPropertyValue, result);
+                            CheckForConstraintOnMatchingRegex(pocoProperty, jsonPropertyValue, result);
+                            CheckForIntegersInDefinedRange(pocoProperty, jsonPropertyValue, result);
+                            CheckForValidListOfValues(pocoProperty, jsonPropertyValue, result);
+                            await CheckForValidContentOfTypesRetrievedFromUriAsync(pocoProperty, jsonPropertyValue, result);
+                            await CheckForValidContentOfTypesRetrievedFromUriConditionallyAsync(pocoProperty, jsonPropertyValue, objectToAnalyze, result);
                         }
 
                         // These checks are based on having AND not having an attribute so must be outside the above test
-                        this.CheckForByteCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
-                        this.CheckForIntegerCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
-                        this.CheckForLongCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
+                        CheckForByteCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
+                        CheckForIntegerCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
+                        CheckForLongCloseToBoundary(pocoPropertyType, pocoProperty, jsonPropertyValue, result);
                     }
                 }
                 else
                 {
-                    result.Add(this.messageBuilder.JsonIncludesUnexpectedPropertyMessage(jsonProperty, typeToCompareWith));
+                    result.Add(messageBuilder.JsonIncludesUnexpectedPropertyMessage(jsonProperty, typeToCompareWith));
                 }
             }
 
@@ -636,7 +636,7 @@ public class SimpleJsonAnalyzer
             {
                 if (exclusiveProperties.Any())
                 {
-                    result.Add(this.messageBuilder.NoRequiredMutuallyExclusivePropertiesMessage(typeToCompareWith, exclusiveProperties.Select(p => p.Name).ToArray()));
+                    result.Add(messageBuilder.NoRequiredMutuallyExclusivePropertiesMessage(typeToCompareWith, exclusiveProperties.Select(p => p.Name).ToArray()));
                 }
             }
 
@@ -694,19 +694,19 @@ public class SimpleJsonAnalyzer
                     && !foundProperties.Contains(propertyInfo.DataMemberName()?.ToLowerInvariant() ?? "DoesNotExist")
                     && exclusiveProperties.All(p => !string.Equals(p.Name, propertyInfo.Name, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    result.Add(this.messageBuilder.MissingPropertyValueMessage(propertyInfo));
+                    result.Add(messageBuilder.MissingPropertyValueMessage(propertyInfo));
                 }
             }
         }
         catch (Exception ex)
         {
-            result.Add(this.messageBuilder.JsonAnalysisExceptionMessage(ex));
+            result.Add(messageBuilder.JsonAnalysisExceptionMessage(ex));
         }
 
         // Don't include the all good message for nested types
         if (result.Count == 0 && !isRecursive)
         {
-            result.Add(this.messageBuilder.AllGoodMessage);
+            result.Add(messageBuilder.AllGoodMessage);
         }
 
         return result;
@@ -744,7 +744,7 @@ public class SimpleJsonAnalyzer
 
             if (!converter.CanConvert(pocoProperty.PropertyType))
             {
-                result.Add(this.messageBuilder.JsonConverterCannotConvertMessage);
+                result.Add(messageBuilder.JsonConverterCannotConvertMessage);
             }
             else
             {
@@ -752,7 +752,7 @@ public class SimpleJsonAnalyzer
                 {
                     var stringToConvert = "{" + jsonProperty + "}";
 
-                    var genType = this.GenerateSimpleTypeWithJsonConverter(pocoProperty, (JsonConverterAttribute)jsonConverter);
+                    var genType = GenerateSimpleTypeWithJsonConverter(pocoProperty, (JsonConverterAttribute)jsonConverter);
 
                     // Deserialize to check can do this
                     var ignored = JsonConvert.DeserializeObject(stringToConvert, genType);
@@ -763,7 +763,7 @@ public class SimpleJsonAnalyzer
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                    result.Add(this.messageBuilder.UnexpectedValueForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
+                    result.Add(messageBuilder.UnexpectedValueForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
                     return true; // Returning true as have dealt with conversion (even though it errored)
                 }
             }
@@ -783,7 +783,7 @@ public class SimpleJsonAnalyzer
                         }
                     }
 
-                    result.Add(this.messageBuilder.UnexpectedStringForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
+                    result.Add(messageBuilder.UnexpectedStringForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
                     return true; // Returning true as have dealt with conversion
                 }
 
@@ -797,7 +797,7 @@ public class SimpleJsonAnalyzer
                         }
                     }
 
-                    result.Add(this.messageBuilder.UnexpectedValueForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
+                    result.Add(messageBuilder.UnexpectedValueForEnumMessage(pocoProperty, jsonProperty.Value.ToString()));
                     return true; // Returning true as have dealt with conversion
                 }
             }
@@ -905,7 +905,7 @@ public class SimpleJsonAnalyzer
                    || type1 == JTokenType.Float.ToString();
         }
 
-        return this.StandardizeTypeName(type1) == this.StandardizeTypeName(type2);
+        return StandardizeTypeName(type1) == StandardizeTypeName(type2);
     }
 
     private PropertyInfo GetProperty(Type type, string propertyName)

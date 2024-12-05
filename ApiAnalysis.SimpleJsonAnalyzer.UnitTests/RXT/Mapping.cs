@@ -33,10 +33,10 @@ public class Mapping : ICloneable
     {
         return new Mapping
         {
-            Type = this.Type,
-            NameContains = this.NameContains,
-            Output = this.Output,
-            IfReadOnly = this.IfReadOnly,
+            Type = Type,
+            NameContains = NameContains,
+            Output = Output,
+            IfReadOnly = IfReadOnly,
         };
     }
 }

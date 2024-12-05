@@ -33,13 +33,13 @@ public class Profile : CanNotifyPropertyChanged, ICloneable
     {
         get
         {
-            return this.mappings;
+            return mappings;
         }
 
         set
         {
-            this.mappings = value;
-            this.OnPropertyChanged();
+            mappings = value;
+            OnPropertyChanged();
         }
     }
 
@@ -49,13 +49,13 @@ public class Profile : CanNotifyPropertyChanged, ICloneable
     {
         get
         {
-            return this.selectedMapping;
+            return selectedMapping;
         }
 
         set
         {
-            this.selectedMapping = value;
-            this.OnPropertyChanged();
+            selectedMapping = value;
+            OnPropertyChanged();
         }
     }
 
@@ -100,6 +100,6 @@ public class Profile : CanNotifyPropertyChanged, ICloneable
 
     public void RefreshMappings()
     {
-        this.OnPropertyChanged(nameof(this.Mappings));
+        OnPropertyChanged(nameof(Mappings));
     }
 }

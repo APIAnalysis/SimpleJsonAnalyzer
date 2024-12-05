@@ -12,7 +12,7 @@ public sealed class ApiAnalysisStringStartsWithAttribute : BaseApiAnalysisAttrib
 {
     public ApiAnalysisStringStartsWithAttribute(string expectedStart)
     {
-        this.ExpectedStart = expectedStart;
+        ExpectedStart = expectedStart;
     }
 
     public string ExpectedStart { get; }
