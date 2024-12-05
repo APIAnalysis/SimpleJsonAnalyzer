@@ -40,18 +40,16 @@ namespace ApiAnalysis
         {
             foreach (var customAttributeData in pi.CustomAttributes)
             {
-                if (customAttributeData.AttributeType?.Name == nameof(DataMemberAttribute))
+                if (customAttributeData.AttributeType?.Name != nameof(DataMemberAttribute))
+                    continue;
+
+                if (customAttributeData.NamedArguments == null)
+                    continue;
+
+                foreach (var namedArgument in customAttributeData.NamedArguments)
                 {
-                    if (customAttributeData.NamedArguments != null)
-                    {
-                        foreach (var namedArgument in customAttributeData.NamedArguments)
-                        {
-                            if (namedArgument.MemberName == nameof(DataMemberAttribute.Name))
-                            {
-                                return namedArgument.TypedValue.Value.ToString();
-                            }
-                        }
-                    }
+                    if (namedArgument.MemberName == nameof(DataMemberAttribute.Name))
+                        return namedArgument.TypedValue.Value.ToString();
                 }
             }
 
